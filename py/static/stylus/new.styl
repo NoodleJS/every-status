@@ -1,0 +1,95 @@
+box_padding = 20px
+textarea_height = 110px
+
+.new-form
+  margin: 0 auto
+  margin-top: 15px
+  width: 500px
+  .box-text
+    position: relative
+    padding: box_padding
+    background-color: #fff
+    .textarea
+      box-sizing: border-box
+      width: 100%
+      height: textarea_height
+      margin-bottom: 10px
+    .input
+      box-sizing: border-box
+      width: 100%
+    .funcs
+      clearfix()
+      position: absolute
+      top: textarea_height + box_padding - 27
+      left: box_padding + 5
+      cursor: pointer
+      li
+        float:left
+        color: #999
+        font-size: 24px
+  .box-bottom
+    clearfix()
+    background-color: rgb(60, 58, 55)
+    padding: 0 20px 15px 20px
+    .btn
+      -webkit-appearance: none
+      border: none
+      color: rgb(235,235,235)
+      background-color: rgb(97, 85, 74)
+      float: right
+      padding: 6px 8px
+      font-size: 18px
+      border-radius: 0 0 3px 3px
+      margin: 0
+    .share input
+      display: none
+
+.private-setting
+  float: left
+  margin-top: 5px
+  .private-label
+    color: #fff
+    font-size: 12px
+    cursor: pointer
+
+.pic-row
+  clearfix()
+  .pic-wrapper
+    position: relative
+    float: left
+    margin-right: 15px
+    margin-bottom: 15px
+    .icon-delete
+      display:none
+      cursor: pointer
+      top: -8px
+      right: -8px
+      position: absolute
+      color: #8ba367
+      font-size: 20px
+    .pic
+      background-color: #F1ECE2
+      background-image: url(img/loading.gif)
+      background-position: center center
+      background-repeat: no-repeat
+      width: 90px
+      height: 90px
+      overflow: hidden
+      .percent
+        line-height: 90px
+        text-align: center
+      img
+        display: block
+    &:hover .icon-delete
+      display: block
+
+@import "mod/share"
+
+
+/* for iphone */
+@media (max-width: 480px)
+  .new-form
+    width: auto
+    margin: 10px
+  .new-form .box-text
+    padding: 10px

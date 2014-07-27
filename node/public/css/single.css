@@ -1,0 +1,12 @@
+.single {
+  width: 800px;
+  margin: 20px auto 0 auto;
+  padding: 40px;
+  background-color: #fff;
+}
+.single p {
+  margin-bottom: 5px;
+}
+.single a {
+  color: #8ba367;
+}

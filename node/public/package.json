@@ -1,0 +1,19 @@
+{
+  "name": "huixiang",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "gulp-jshint": "~1.7.1",
+    "gulp-stylus": "~1.0.5",
+    "gulp": "~3.8.6",
+    "nib": "~1.0.3",
+    "map-stream": "~0.1.0"
+  },
+  "devDependencies": {
+    "gulp-stylus": "*",
+    "gulp": "~3.6.2"
+  }
+}

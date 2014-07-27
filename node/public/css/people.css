@@ -1,0 +1,143 @@
+#bd {
+  position: relative;
+  max-width: 400px;
+}
+#people {
+  position: fixed;
+  text-align: center;
+  top: 75px;
+  left: 50%;
+  margin-left: -280px;
+}
+#people .share {
+  margin-right: 0;
+  float: none;
+}
+#people .avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+.empty {
+  text-align: center;
+  height: 400px;
+  line-height: 400px;
+}
+.favs {
+  margin-bottom: 80px;
+}
+.favs .piece {
+  margin: 15px 0;
+  position: relative;
+  background-color: #fff;
+}
+.favs .del {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #a00000;
+  text-align: center;
+  z-index: 0;
+}
+.favs .piece-body {
+  padding: 20px 20px 15px 20px;
+  position: relative;
+  z-index: 5;
+  background: #fff;
+}
+.favs .content {
+  padding-bottom: 10px;
+  word-wrap: break-word;
+}
+.favs .content a {
+  color: #333;
+}
+.favs .by {
+  text-align: right;
+  padding-bottom: 10px;
+}
+.favs .private,
+.favs .image {
+  color: #999;
+  font-size: 16px;
+  float: left;
+}
+.favs .addtime {
+  color: #999;
+  font-size: 12px;
+  float: right;
+}
+.pages {
+  position: relative;
+  margin: 10px 15px;
+}
+.pages .num {
+  top: 0;
+  height: 20px;
+  position: absolute;
+  color: #3c3a37;
+  font-size: 12px;
+}
+.pages .prev {
+  left: -10px;
+  border-radius: 3px 0 0 3px;
+}
+.pages .current {
+  font-size: 12px;
+  color: #9c9382;
+  text-align: center;
+}
+.pages .next {
+  right: -10px;
+  border-radius: 0 3px 3px 0;
+}
+.share {
+  float: right;
+  margin: 5px 10px 0 0;
+  position: relative;
+  top: -2px;
+}
+.share .lbl {
+  color: #fff;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  display: inline-block;
+}
+.share .sharebtn {
+  background-image: url("/static/img/share_icons.png");
+  width: 24px;
+  height: 19px;
+  position: relative;
+  top: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+.toweibo {
+  background-position: -50px 0;
+}
+.toweibo.active {
+  background-position: -50px -20px;
+}
+.todouban {
+  background-position: -72px 0;
+}
+.todouban.active {
+  background-position: -72px -20px;
+}
+/* for iphone */
+@media (max-width: 480px) {
+  .favs {
+    margin: 0 10px;
+  }
+  .favs .del {
+    z-index: 9;
+    background-color: #fff;
+    color: #999;
+  }
+}
