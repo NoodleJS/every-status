@@ -45,6 +45,10 @@
 .piece .favs {
   margin-top: 15px;
 }
+.piece .favs:before {
+  content: ".";
+  visibility: hidden;
+}
 .piece .favs .bd {
   position: relative;
 }
@@ -69,6 +73,10 @@
   height: 24px;
   position: relative;
   float: left;
+}
+.piece .favs .people:before {
+  content: ".";
+  visibility: hidden;
 }
 .piece .favs .people ul {
   float: left;
