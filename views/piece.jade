@@ -1,0 +1,50 @@
+extends layout
+
+block content
+
+
+  -var favs,liked,fav_count;
+  - var piece = {content:'Lets start from here !'}
+
+    .piece(class= piece.pics ? 'withpic' : '' )
+      .piece-inner
+        .piece-main
+          .card
+            .content= piece.content
+            if piece.author_name || piece.work_title
+              if piece.author_name
+                .by= piece.author_name
+              if piece.work_title
+                .by= piece.work_title
+            if piece.pics
+              .pics
+                a(href='javascript:;').last
+                  i.icon-chevron-left
+                ul
+                  for pic in piece.pics
+                    li
+                      a(href='javascript:;',target='_blank',title='查看全图')
+                        img(src="http://huixiang.qiniudn.com/")
+                a(href='javascript:;').next
+                  i.icon-chevron-right
+            .favs
+              a.like-wrap
+                i.icon-heart(data-id="#{piece.id}")
+              .people
+                if !(user || liked)
+                  ul.liked
+                else 
+                  ul
+                  if user
+                    li
+                      a(href="/people/1")
+                        img(src="")
+                  for faver in favs
+                    if !(user && user.id!=faver.id)
+                      li
+                        a(href="/people")
+                          img(src="")
+                  if fav_count > 8
+                    .fav-count 等
+                      span.count 人喜欢
+

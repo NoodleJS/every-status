@@ -46,4 +46,8 @@ router.get('/', function(req, res) {
   res.render('index', { title: '茴香' , name: 'index'});
 });
 
+router.get('/piece', function(req, res) {
+  res.render('piece', { title: '茴香' , name: 'piece'});
+});
+
 module.exports = router;
