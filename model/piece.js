@@ -14,6 +14,10 @@ var Piece = mongoose.model('Piece', pieceSchema);
 
 var p = new Piece
 
+p.save(function(err){
+  if(err) console.log(err)
+})
+
 module.exports = Piece
 
 

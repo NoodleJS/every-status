@@ -1,0 +1,9 @@
+//在根目录对应设置settings.json
+{
+  "mongodb":{
+    "host":"localhost",
+    "username":"admin",
+    "passwd":"admin",
+    "dbname":"dev"
+  }
+}
