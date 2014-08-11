@@ -18,7 +18,7 @@ describe('User', function(){
     })
 })
 
-describe('pieceModel', function(){
+describe('checkModel', function(){
   describe('init',function(){
     it('should has created & update prop', function(){
       var Piece = require('../model/piece')

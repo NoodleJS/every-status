@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://121.40.137.124:/test');
 
 var Cat = mongoose.model('Cat', { name: String });
 
