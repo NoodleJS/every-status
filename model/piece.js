@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 
+var db = require('../proxy/index')
+
+
 var pieceSchema = mongoose.Schema({
     content: String,
     link: String,
@@ -13,6 +16,9 @@ var pieceSchema = mongoose.Schema({
 var Piece = mongoose.model('Piece', pieceSchema);
 
 var p = new Piece
+
+p.pics = [1,2,3]
+console.log(p)
 
 p.save(function(err){
   if(err) console.log(err)
