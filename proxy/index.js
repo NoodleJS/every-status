@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var setting = require('../settings.json').mongodb
+var setting = require('../settings.json').mongodb || {}
 
 var uri = 'mongodb://USER:PASS@HOST:port/DB'.replace('USER',setting.username)
                                             .replace('PASS',setting.passwd)
