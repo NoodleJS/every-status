@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+  - var title = '今天...'
+
+  form.new-form(method='post')
+    div.box-text
+      textarea.textarea(name='content', placeholder='今天...')
+      input(type='hidden', name='pics', id='pics')
+      div.pic-row
+      div.form-row
+        input.input(type='text', name='link',id='link', placeholder='http://')
+      ul.funcs
+        li.icon-image
+      div#uploader-holer
+    div.box-bottom
+      div.hint(style='display:none')
+      input.btn(type='submit', value='好了')
+      div.private-setting
+        input#private.private-chk(type='checkbox',name='private')
+        label.private-label(for='private') 私藏
+      div.share
+        span.lbl 分享：
+        label.sharebtn.toweibo(for='weibochk')
+        input#weibochk(type='checkbox', value='weibo', name='share')
+        label#doubanchk(type='checkbox', value='douban', name='share')

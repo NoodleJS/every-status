@@ -49,15 +49,11 @@ router.get('/', function(req, res) {
 
 router.get('/add', function(req, res) {
     //渲染页面
-    //res.send()
+    res.render('add', { title: '今天...', name: 'add'})
 })
 
 router.post('/doAdd', function(req, reqs) {
     //增加逻辑
-})
-
-router.get('/show/:id',function(){
-    //展现piece
 })
     
 //router.get('/add', con.create )
@@ -65,7 +61,8 @@ router.get('/show/:id',function(){
 router.get('/test/:id', function(req, res) {
     console.log(req.query)
     console.log(req.params)
-    res.send({msg:req.query})
+    console.log(1)
+    res.render('add', { title: '今天...', name: 'new'})
     
 })
 
