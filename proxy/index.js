@@ -13,9 +13,9 @@ try{
 
 
 var uri = 'mongodb://USER:PASS@HOST:port/DB'.replace('USER',setting.username)
-                                            .replace('PASS',setting.passwd)
-                                            .replace('HOST',setting.host)
-                                            .replace('DB',setting.dbname);
+  .replace('PASS',setting.passwd)
+  .replace('HOST',setting.host)
+  .replace('DB',setting.dbname);
 
 var db = mongoose.connect(uri,function(err){
   if (err) console.log(err)

@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
 
-
-
 var userSchema = mongoose.Schema({
     name: String,
     avatar: String,
@@ -14,8 +12,6 @@ var userSchema = mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 
 var u = new User
-
-console.log(u)
 
 module.exports = User
 
