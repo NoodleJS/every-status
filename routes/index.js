@@ -44,7 +44,7 @@ rule_map = {
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: '茴香' , name: 'index'});
+  res.render('index', { title: '每思每刻' , name: 'index'});
 });
 
 router.get('/add', function(req, res) {
