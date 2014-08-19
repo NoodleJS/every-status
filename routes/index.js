@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var con = require('../controller/pieces');
 
 rule_map = {
     "page":{
@@ -45,6 +46,28 @@ rule_map = {
 router.get('/', function(req, res) {
   res.render('index', { title: '茴香' , name: 'index'});
 });
+
+router.get('/add', function(req, res) {
+    //渲染页面
+    //res.send()
+})
+
+router.post('/doAdd', function(req, reqs) {
+    //增加逻辑
+})
+
+router.get('/show/:id',function(){
+    //展现piece
+})
+    
+//router.get('/add', con.create )
+
+router.get('/test/:id', function(req, res) {
+    console.log(req.query)
+    console.log(req.params)
+    res.send({msg:req.query})
+    
+})
 
 router.get('/piece', function(req, res) {
   res.render('piece', { title: '茴香' , name: 'piece'});

@@ -1,21 +1,23 @@
 var mongoose = require('mongoose');
 
-var setting = {} ;
+var env = process.env.NODE_ENV || 'development'
+var setting = {};
+var uri = '';
 
-try{
-  setting = require('../settings.json');
-} catch(err){
-  
-  if(err.code === 'MODULE_NOT_FOUND'){
-    setting = require('../settings.example.json');
-    }
-}
+setting = env == 'development' ? require('../settings.example.json').mongodb : require('../settings.json').mongodb ;
 
+if ( env == 'development' ) {
 
-var uri = 'mongodb://USER:PASS@HOST:port/DB'.replace('USER',setting.username)
+  uri = 'mongodb://localhost/dev'
+
+} else if ( env == 'production' ) {
+
+  uri = 'mongodb://USER:PASS@HOST:port/DB'.replace('USER',setting.username)
   .replace('PASS',setting.passwd)
   .replace('HOST',setting.host)
   .replace('DB',setting.dbname);
+
+}
 
 var db = mongoose.connect(uri,function(err){
   if (err) console.log(err)

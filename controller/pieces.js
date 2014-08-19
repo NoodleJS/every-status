@@ -2,13 +2,14 @@ var Piece = require('../model/piece');
 
 exports.create = function(req, res) {
   new Piece({
-    content: "Lets start from here!",
-    link: "http://github.com/elrrrrrrr",
+    content: req.params.content,
+    link: req.params.link,
     work: true
   }).save(function(e) {
-    console.log('success')
+    //console.log('over')
+
   });
-  console.log('over')
+  res.send(200,{'code':'200'})
 }
 
 exports.list = function(req, res) {
@@ -26,5 +27,3 @@ exports.show = function(req, res) {
     res.send(piece)
   })
 }
-
-exports.create()
