@@ -69,8 +69,6 @@ router.get('/test/:id', function(req, res) {
     
 })
 
-router.get('/piece', function(req, res) {
-  res.render('piece', { title: '茴香' , name: 'piece'});
-});
+router.get('/piece/:id', con.show);
 
 module.exports = router;

@@ -12,10 +12,10 @@ if ( env == 'development' ) {
 
 } else if ( env == 'production' ) {
 
-  uri = 'mongodb://USER:PASS@HOST:port/DB'.replace('USER',setting.username)
-  .replace('PASS',setting.passwd)
-  .replace('HOST',setting.host)
-  .replace('DB',setting.dbname);
+  uri = 'mongodb://USER:PASS@HOST:port/DB'.replace('USER', setting.username)
+      .replace('PASS',setting.passwd)
+      .replace('HOST',setting.host)
+      .replace('DB',setting.dbname);
 
 }
 

@@ -20,10 +20,22 @@ exports.list = function(req, res) {
 }
 
 exports.show = function(req, res) {
+
+  var id = req.params.id;
+
+  if (isNaN(id)) {
+    throw new Error('请输入正确的id值')
+  }
+
   Piece.findOne({
-    title: req.params.title
+    id: id
   }, function(err, piece) {
     //handler the piece
-    res.send(piece)
+    res.render('piece', {
+      titel: '每思每刻',
+      name: 'piece',
+      piece: piece
+    })
   })
 }
+
