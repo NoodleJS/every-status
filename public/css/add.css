@@ -24,7 +24,7 @@
   left: 25px;
   cursor: pointer;
 }
-.new-form .box-text .funcs:before {
+.new-form .box-text .funcs:after {
   content: ".";
   visibility: hidden;
 }
@@ -37,7 +37,7 @@
   background-color: #3c3a37;
   padding: 0 20px 15px 20px;
 }
-.new-form .box-bottom:before {
+.new-form .box-bottom:after {
   content: ".";
   visibility: hidden;
 }
@@ -64,7 +64,7 @@
   font-size: 12px;
   cursor: pointer;
 }
-.pic-row:before {
+.pic-row:after {
   content: ".";
   visibility: hidden;
 }
