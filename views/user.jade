@@ -1,0 +1,51 @@
+extends layout
+
+block content
+
+  //- need var : user,favs,current,index,pages
+  //- user所查看用户,current当前用户,index当前分页,favs收藏,pages总页数
+  
+  div#people
+    div.avatar
+      img(src='#{user.avatar}', alt='#{user.name}')
+    if user && user.name == current.name
+      div.share
+        if user.douban_access_token
+          a.sharebtn.active.todouban(href='javascript:;', data-type='douban', title='已绑定豆瓣')
+        else 
+          a.sharebtn.todouban(href='javascript:;', data-type='douban', title='绑定豆瓣')
+        if user.weibo_access_token
+          a.sharebtn.active.toweibo(href='javascript:;', data-type='weibo', title='已绑定微博')
+        else 
+          a.sharebtn.toweibo(href='javascript:;', data-type='weibo', title='绑定微博')
+    if pages > 1
+      div.pages
+        if index -1 > 0 
+          a.prev.num(href='?page=#{pages - 1}')
+        div.current  #{index}/#{pages}
+  div.favs
+    each fav in favs
+      div.piece(data-id='#{fav.id}')
+        if current && user && current.id == user.id
+          div.del.icon-times
+        div.piece-body
+          div.content
+            a(href='/piece/#{fav.id}', target='_blank')  #{fav.content}
+          div.by
+            if fav.author_name
+              #{fav.author_name}
+            if fav.work_title
+              《#{fav.work_title}》
+          div.info
+            if fav.private
+              div.private
+                i.icon-lock-closed
+            if fav.pics
+              div.image
+                i.icon-image
+          div.addtime
+            if fav.addtime
+                =fav.addtime
+
+
+

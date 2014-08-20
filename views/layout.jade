@@ -18,7 +18,7 @@ html
           span.quote 」
       .account
         if user
-          img.avatar(src='$user[', avatar"]"='')
+          img.avatar(src='#{user.avatar}')
         else 
           img.avatar(src='/img/default-avatar.png')
         ul.menu(style='display:none')
