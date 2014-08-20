@@ -1,6 +1,7 @@
 every-status
 ============
 [![Build Status](https://travis-ci.org/elrrrrrrr/every-status.svg?branch=master)](https://travis-ci.org/elrrrrrrr/every-status)
+[ ![Codeship Status for elrrrrrrr/every-status](https://www.codeship.io/projects/0fc8a4e0-0a6c-0132-0b71-72af89f9ba0d/status)](https://www.codeship.io/projects/31765)
 
 ## 这是什么
 
