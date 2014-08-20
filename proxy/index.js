@@ -4,7 +4,7 @@ var env = process.env.NODE_ENV || 'development'
 var setting = {};
 var uri = '';
 
-setting = env == 'development' ? require('../settings.example.json').mongodb : require('../settings.json').mongodb ;
+setting = (env == 'development') ? require('../settings.example.json').mongodb : require('../settings.json').mongodb ;
 
 if ( env == 'development' ) {
 
@@ -16,7 +16,6 @@ if ( env == 'development' ) {
       .replace('PASS',setting.passwd)
       .replace('HOST',setting.host)
       .replace('DB',setting.dbname);
-
 }
 
 var db = mongoose.connect(uri,function(err){
