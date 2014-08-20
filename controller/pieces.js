@@ -6,12 +6,11 @@ exports.create = function(req, res) {
     link: req.body.link,
     work: true
   }).save(function(e, it) {
-
     
+    res.redirect('/piece/' + it.id)
     //console.log('over')
 
   });
-  res.redirect('/piece/' + 48)
   
 }
 
