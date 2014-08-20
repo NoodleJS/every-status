@@ -52,6 +52,8 @@ router.get('/add', function(req, res) {
     res.render('add', { title: '今天...', name: 'add'})
 })
 
+router.post('/add', con.create) 
+
 router.post('/doAdd', function(req, reqs) {
     //增加逻辑
 })

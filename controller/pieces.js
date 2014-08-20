@@ -2,14 +2,17 @@ var Piece = require('../model/piece');
 
 exports.create = function(req, res) {
   new Piece({
-    content: req.params.content,
-    link: req.params.link,
+    content: req.body.content,
+    link: req.body.link,
     work: true
-  }).save(function(e) {
+  }).save(function(e, it) {
+
+    
     //console.log('over')
 
   });
-  res.send(200,{'code':'200'})
+  res.redirect('/piece/' + 48)
+  
 }
 
 exports.list = function(req, res) {
