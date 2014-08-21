@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var con = require('../controller/pieces');
+var user = require('../controller/users');
 
 rule_map = {
     "page":{
@@ -79,6 +80,8 @@ router.get('/test', function(req, res) {
     })
     
 })
+
+router.get('/fake', user.fake);
 
 router.get('/piece/:id', con.show);
 

@@ -21,6 +21,22 @@ SequenceSchema.statics.increment = function (schemaName, callback) {
 
 var Sequence = mongoose.model('Sequence', SequenceSchema);
 
-module.exports = Sequence
+//在创建文档时，获取自增ID值
+
+exports.incrementId = function(sechema, model) {
+    sechema.pre('save', function(next) {
+        var self = this;
+        if( self.isNew ) {
+            Sequence.increment(model,function (err, result) {
+                if (err)
+                  throw err;
+                self.id = result.next;
+                next();
+            });
+        } else {
+            next();
+        }
+    })
+}
 
 

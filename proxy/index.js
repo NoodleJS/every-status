@@ -20,7 +20,6 @@ if ( env == 'development' ) {
 
 var db = mongoose.connect(uri,function(err){
   if (err) console.log(err)
-  //console.log('ok')
 });
 
 exports = db
