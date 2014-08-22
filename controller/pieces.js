@@ -4,7 +4,8 @@ exports.create = function(req, res) {
   new Piece({
     content: req.body.content,
     link: req.body.link,
-    work: true
+    work: true, 
+    author: req.session.userId
   }).save(function(e, it) {
     
     res.redirect('/piece/' + it.id)
