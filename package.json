@@ -14,7 +14,7 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "jade": "~1.3.0", 
-    "mongoose": "~2.8.0",
+    "mongoose": "*",
     "express-session": "1.7.6"
   },
   "devDependencies": {
