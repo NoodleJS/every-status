@@ -81,8 +81,6 @@ router.get('/test', function(req, res) {
     
 })
 
-router.get('/fake', user.fake);
-
 router.get('/piece/:id', con.show);
 
 module.exports = router;
