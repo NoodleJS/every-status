@@ -18,11 +18,13 @@ if ( env == 'development' ) {
       .replace('DB',setting.dbname);
 }
 
-var db = mongoose.connect(uri,function(err){
+var db = mongoose.createConnection(uri,function(err){
   if (err) console.log(err)
 });
 
-exports = db
+global.db = db;
+
+module.exports = exports = db;
 
 
 

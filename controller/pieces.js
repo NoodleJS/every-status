@@ -1,13 +1,14 @@
 var Piece = require('../model/piece');
 
 exports.create = function(req, res) {
+  
   new Piece({
     content: req.body.content,
     link: req.body.link,
     work: true, 
-    author: req.session.userId
+    author: '53f893ddf283d481086567ac'
   }).save(function(e, it) {
-    
+    if(e) throw e
     res.redirect('/piece/' + it.id)
     //console.log('over')
 

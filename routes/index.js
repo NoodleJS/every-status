@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
+
 var con = require('../controller/pieces');
 var user = require('../controller/users');
+var mock = require('../controller/mock');
 
 rule_map = {
     "page":{
@@ -54,6 +56,8 @@ router.get('/add', function(req, res) {
 })
 
 router.post('/add', con.create) 
+
+router.get('/fake', mock.addUser)
 
 router.get('/test', function(req, res) {
     var fakeuser = {

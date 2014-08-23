@@ -19,7 +19,7 @@ SequenceSchema.statics.increment = function (schemaName, callback) {
             { $inc: { next: 1 } }, {"new":true, upsert:true}, callback);
 };
 
-var Sequence = mongoose.model('Sequence', SequenceSchema);
+var Sequence = db.model('Sequence', SequenceSchema);
 
 //在创建文档时，获取自增ID值
 

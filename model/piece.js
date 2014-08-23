@@ -17,6 +17,6 @@ var pieceSchema = mongoose.Schema({
 
 Sequence.incrementId(pieceSchema, 'Piece')
 
-var Piece = mongoose.model('Piece', pieceSchema);
+var Piece = db.model('Piece', pieceSchema);
 
 module.exports = Piece

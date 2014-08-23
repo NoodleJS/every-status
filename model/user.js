@@ -16,6 +16,6 @@ var userSchema = mongoose.Schema({
 
 Sequence.incrementId(userSchema, 'User');
 
-var User = mongoose.model('User', userSchema);
+var User = db.model('User', userSchema);
 
 module.exports = User
