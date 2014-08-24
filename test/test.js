@@ -49,7 +49,7 @@ describe('GodModel', function() {
 
         User.findOne( function(err, it ) {
             user = it;
-            if ( user.name != 'elrrrrrrr') {
+            if ( user && user.name != 'elrrrrrrr') {
                 mock.addUser()
             }
         })
