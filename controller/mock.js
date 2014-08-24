@@ -21,10 +21,16 @@ exports.clean = function(req, res) {
 }
 
 
-exports.accessMock = function() {
+exports.godModel = function(req, res, cb) {
 
-    //fake user
-    global.God = User.find()
+    //access global model
+    console.log('1')
+    User.findOne({}, function(err, user) {
+
+        global.God = user;
+        
+        cb(req, res)
+    })
     
 }
 

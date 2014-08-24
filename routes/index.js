@@ -4,8 +4,9 @@ var router = express.Router();
 var con = require('../controller/pieces');
 var user = require('../controller/users');
 var mock = require('../controller/mock');
+var connect = require('../proxy/connect');
 
-rule_map = {
+var rule_map = {
     "page":{
         "/": "index",
         '/new': 'new',
@@ -59,6 +60,12 @@ router.post('/add', con.create)
 
 router.get('/fake', mock.addUser)
 
+router.get('/god', function(req, res) {
+
+    mock.godModel(req, res, connect.sendOk)  
+     
+})
+
 router.get('/test', function(req, res) {
     var fakeuser = {
         avatar: 'http://tp1.sinaimg.cn/2017654444/50/5635300102/1', 
@@ -81,8 +88,7 @@ router.get('/test', function(req, res) {
         pages: 1,
         index: 1,
         favs:[fakepiece,fakepiece]
-    })
-    
+    })  
 })
 
 router.get('/piece/:id', con.show);
