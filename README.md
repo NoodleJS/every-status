@@ -43,13 +43,13 @@ every-status
 - [x] 自动部署
 - [x] 列表页布局
 - [x] nginx端口转发
-
 - [x] 设置默认用户
 - [x] 关联user-piece 1:n
 - [ ] 关联piece-user n:1
-- [ ] 增加用户逻辑login logout
-- [ ] 增加session处理登陆
+- [x] 增加用户逻辑login logout
+- [x] 增加session处理登陆
 
+- [ ] 确定测试promise库
 - [ ] 完善分页逻辑
 - [ ] 列表页数据动态化
 - [ ] 确认前端JS包管理
