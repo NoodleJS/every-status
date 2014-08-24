@@ -27,4 +27,10 @@ router.get('/', function(req, res) {
     })  
 })
 
+router.get('/showSession', function(req, res) {
+    res.render('console', {
+        message: 'Session',
+        content: JSON.stringify(req.session)
+    })
+})
 module.exports = router;
