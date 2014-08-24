@@ -44,8 +44,10 @@ every-status
 - [x] 列表页布局
 - [x] nginx端口转发
 
-- [ ] 关联user-piece
-- [ ] 增加用户逻辑
+- [ ] 设置默认用户
+- [ ] 关联user-piece 1:n
+- [ ] 关联piece-user n:1
+- [ ] 增加用户逻辑login logout
 - [ ] 增加session处理登陆
 
 - [ ] 完善分页逻辑

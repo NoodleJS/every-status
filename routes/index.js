@@ -45,15 +45,17 @@ var rule_map = {
     }
 }
 
+global.env == 'development' && mock.godModel()
 
-/* GET home page. */
+
 router.get('/', function(req, res) {
-  res.render('index', { title: '每思每刻' , name: 'index'});
+
+    res.render('index', { title: '每思每刻' , name: 'index'});
 });
 
 router.get('/add', function(req, res) {
     //渲染页面
-    res.render('add', { title: '今天...', name: 'add'})
+    res.render('add', { title: '此刻...', name: 'add'})
 })
 
 router.post('/add', con.create) 
@@ -61,9 +63,9 @@ router.post('/add', con.create)
 router.get('/fake', mock.addUser)
 
 router.get('/god', function(req, res) {
-
+    //ugly ...
     mock.godModel(req, res, connect.sendOk)  
-     
+
 })
 
 router.get('/test', function(req, res) {

@@ -24,12 +24,12 @@ exports.clean = function(req, res) {
 exports.godModel = function(req, res, cb) {
 
     //access global model
-    console.log('1')
+    
     User.findOne({}, function(err, user) {
 
         global.God = user;
         
-        cb(req, res)
+        cb && cb(req, res)
     })
     
 }

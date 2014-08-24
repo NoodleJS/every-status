@@ -4,6 +4,8 @@ var env = process.env.NODE_ENV || 'development'
 var setting = {};
 var uri = '';
 
+global.env = env;
+
 setting = (env == 'development') ? require('../settings.example.json').mongodb : require('../settings.json').mongodb ;
 
 if ( env == 'development' ) {

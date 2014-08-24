@@ -6,7 +6,7 @@ exports.create = function(req, res) {
     content: req.body.content,
     link: req.body.link,
     work: true, 
-    author: '53f893ddf283d481086567ac'
+    author: global.env == 'development' ? global.God : req.body.author
   }).save(function(e, it) {
     if(e) throw e
     res.redirect('/piece/' + it.id)
