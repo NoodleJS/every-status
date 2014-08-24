@@ -69,6 +69,7 @@ router.get('/god', function(req, res) {
 })
 
 router.get('/test', function(req, res) {
+
     var fakeuser = {
         avatar: 'http://tp1.sinaimg.cn/2017654444/50/5635300102/1', 
         name: 'elrrrrrrr',
