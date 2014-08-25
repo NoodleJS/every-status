@@ -34,8 +34,8 @@ exports.godModel = function(req, res, cb) {
     
 }
 
+exports.showUser = function(req, res) {
 
-
-
+}
 
 

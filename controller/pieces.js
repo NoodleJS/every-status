@@ -17,10 +17,24 @@ exports.create = function(req, res) {
 }
 
 exports.list = function(req, res) {
-  Piece.find(function(err, pieces) {
-    //handler the result
-    res.send(pieces);
+
+  //default display
+  req.session.user = req.session.user || {}
+
+  Piece.find({author: req.session.user._id},function(err, pieces) { 
+      if (err) throw err
+      res.render('user', { title: '今天...', 
+          name: 'people',
+          user: req.session.user,
+          current: req.session.user, 
+          pages: 1,
+          index: 1,
+          favs: pieces
+      })  
   })
+
+  
+
 }
 
 exports.show = function(req, res) {
