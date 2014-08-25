@@ -43,7 +43,7 @@ router.get('/showPieces', function(req, res) {
 
     Piece.find({author: req.session.user._id},function(err, pieces) { 
         if (err) throw err
-        console.log(pieces)
+        
         res.render('console', {
             message: 'Pieces',
             content: JSON.stringify(pieces)

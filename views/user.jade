@@ -35,12 +35,12 @@ block content
             if fav.author_name
               #{fav.author_name}
             if fav.work_title
-              《#{fav.work_title}》
+              |《#{fav.work_title}》
           div.info
             if fav.private
               div.private
                 i.icon-lock-closed
-            if fav.pics
+            if fav.pics.length > 0
               div.image
                 i.icon-image
           div.addtime
