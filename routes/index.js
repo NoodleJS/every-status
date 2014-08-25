@@ -49,9 +49,9 @@ global.env == 'development' && mock.godModel()
 
 
 router.get('/', function(req, res) {
-
-    res.render('index', { title: '每思每刻' , name: 'index'});
-});
+    //index 页面 
+    res.render('add', { title: '此刻...', name: 'add'})
+})
 
 router.get('/add', function(req, res) {
     //渲染页面
