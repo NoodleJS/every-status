@@ -18,16 +18,16 @@ describe('Database', function(){
     })
 
     describe('increment', function(done) {
+        var Piece = require('../model/piece');
         it('should has an increment id', function(done) {
-            var Piece = require('../model/piece');
             var _t1;
             var _t2;
             
-                new Piece({}).save(function(err,piece) {
+                new Piece({content: 'test in mocha'}).save(function(err,piece) {
 
                     _t1 = piece
 
-                    new Piece({}).save(function(err,piece) {
+                    new Piece({content: 'test in mocha'}).save(function(err,piece) {
 
                         _t2 = piece
                         assert.equal(true,_t1.id == _t2.id - 1)
@@ -35,6 +35,12 @@ describe('Database', function(){
 
                     })
                 })
+        })
+
+        after(function(){
+            Piece.remove({content: 'test in mocha'}, function(err){
+                
+            })
         })
     })
 })

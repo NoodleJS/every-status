@@ -45,7 +45,7 @@ every-status
 - [x] nginx端口转发
 - [x] 设置默认用户
 - [x] 关联user-piece 1:n
-- [ ] 关联piece-user n:1
+- [x] 关联piece-user n:1
 - [x] 增加用户逻辑login logout
 - [x] 增加session处理登陆
 
