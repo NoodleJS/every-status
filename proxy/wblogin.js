@@ -1,12 +1,12 @@
 var http = require('http')
 var querystring = require('querystring');
 var request = require('request');
+var Q = require('q');
 
-var env = global.env || 'developer'; 
+var env = global.env || 'development'; 
 var wb = {};
 
-
-if (env == 'developer'){
+if (env == 'development'){
 
     wb = require('../settings.example.json').wb
 
@@ -25,6 +25,8 @@ if (env == 'developer'){
 
 exports.getToken = function (code) {
 
+    
+
     var post_data = querystring.stringify({
         "client_id": wb.appkey,
         "client_secret": wb.appsecret,
@@ -35,23 +37,45 @@ exports.getToken = function (code) {
 
     var url = 'https://api.weibo.com/oauth2/access_token?'+post_data
 
-    request.post({url:url} , function(e, r, body) {
-        var body = JSON.parse(body);
-        if (e) throw Error('Error when get access_token')
+    
+
+    function syncToken(){
+        var deferred = Q.defer();
+
+        request.post({url:url}, function(e, r, body) {
+            if (e) {
+                deferred.reject(new Error(error))   
+            } else {
+                deferred.resolve(JSON.parse(body).access_token)    
+            }
+        })
+        return deferred.promise    
+    }
+    
+    var token = ' ';
+
+    return syncToken()
+
+    
+    // var token = ' ';
+    // request.post({url:url} , function(e, r, body) {
+    //     if (e) console.log(e)
+    //     var body = JSON.parse(body);
         
-        console.log(body.error)
-    })
+    //     token = body.access_token;        
+    // })    
+    // return token;
 
-
-    return body.acce
+    
+    
 }
 
-exports.getUid = function (token) {
-    return ' '
+exports.getUid = function (code) {
+
 }
 
 exports.testRe = function (code) {
 
 }
 
-exports.getToken('61c4544de59a5192af817e51a0e88349')
+module.exports = exports
