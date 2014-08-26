@@ -5,5 +5,9 @@
     "username":"admin",
     "passwd":"admin",
     "dbname":"dev"
+  },
+  "wb": {
+    "appkey": "2830334342",
+    "appsecret": "9bae73378a9ce4a22cc3b905e049568f"
   }
 }
