@@ -19,21 +19,33 @@ exports.login = function(req, res) {
         req.session.user = global.God;
     } else {
         var code = req.query.code;
+        wb.getToken(code)
+            .then(function(token) {
+                var uid = token.uid;
+                User.findOne({wbId: uid}, function(err, user) {
+                    if (err) console.log(err);
+                    if (user) {
+                        req.session.user = user;
+                    } else {
+                        wb.getInfo(token)
+                            .then(function(info) {
+                                console.log(info);
+                                new User({
+                                    name: info.name,
+                                    wbId: info.id,
+                                    avatar: info.profile_image_url
+                                }).save(function(err, it){
+                                    if (err) console.log(err);
+                                    req.session.user = user;
+                                    res.redirect('/');    
+                                })
+                                
+                            })
+                    }
 
-        var q = wb.getToken(code);
-
-        q.then(function(token){
-            
-            res.render('console',{
-                message: 'test token',
-                content: token
-            })    
-        })
-        
-        //validate
-        //req.session.user = req.body.user
+                })
+            })
     }
-    //res.redirect('/');
 }
 
 exports.logout = function(req, res) {
