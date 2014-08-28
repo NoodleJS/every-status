@@ -1,17 +1,16 @@
 var Piece = require('../model/piece');
 
 exports.create = function(req, res) {
+
   
   new Piece({
     content: req.body.content,
     link: req.body.link,
     work: true, 
-    author: global.env == 'development' ? global.God : req.body.author
+    author: req.session.user._id
   }).save(function(e, it) {
-    if(e) throw e
+    if(e) throw new Error('error in save ');
     res.redirect('/piece/' + it.id)
-    //console.log('over')
-
   });
   
 }
@@ -26,7 +25,7 @@ exports.list = function(req, res) {
       res.render('user', { title: '今天...', 
           name: 'people',
           user: req.session.user,
-          current: req.session.user, 
+          current: req.session.user._id, 
           pages: 1,
           index: 1,
           favs: pieces

@@ -60,10 +60,7 @@ exports.login = function(req, res) {
             if (err) throw new Error('Error In addUser'); 
             doLogin(user)
         })
-    } 
-
-
-    
+    }     
 }
 
 exports.logout = function(req, res) {

@@ -50,7 +50,9 @@ global.env == 'development' && mock.godModel()
 
 router.get('/', function(req, res) {
     //index 页面 
-    res.render('add', { title: '此刻...', name: 'add'})
+
+    //res.render('add', { title: '此刻...', name: 'add'})
+    res.redirect('/add');
 })
 
 router.get('/add', function(req, res) {
