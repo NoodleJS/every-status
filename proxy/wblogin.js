@@ -72,7 +72,6 @@ exports.getInfo = function (token) {
 
     request.get({url: url}, function(e, r, body) {
         if (e) {
-            console.log(e)
             deferred.reject(new Error(e))
         } else {
             console.log(body)

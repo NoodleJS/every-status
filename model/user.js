@@ -5,6 +5,7 @@ var Sequence = require('./sequence');
 var userSchema = mongoose.Schema({
 
     id: { type : Number, index: { unique: true } },
+    wbId: String,
     name: String,
     avatar: String,
     pieces: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Piece' }],
