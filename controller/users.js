@@ -35,7 +35,7 @@ exports.login = function(req, res) {
                 doLogin(user);
             } else {
                 //regsin
-                signUp(token);
+                signUp(msg);
             }
         })
     }
@@ -45,8 +45,8 @@ exports.login = function(req, res) {
         res.redirect('/');
     }
 
-    function signUp(token) {
-        wb.getInfo(token)
+    function signUp(msg) {
+        wb.getInfo(msg)
             .then(addUser)
     }
 

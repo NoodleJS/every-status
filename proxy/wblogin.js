@@ -53,7 +53,7 @@ exports.getToken = function (code) {
 }
 
 exports.getInfo = function (token) {
-
+    console.log(token)
     var access_token = token.access_token;
     var uid = token.uid;
 
@@ -74,7 +74,6 @@ exports.getInfo = function (token) {
         if (e) {
             deferred.reject(new Error(e))
         } else {
-            console.log(body)
             deferred.resolve(JSON.parse(body))
         }
     })
