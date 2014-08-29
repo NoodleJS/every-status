@@ -67,9 +67,7 @@ exports.getInfo = function (token) {
     })
 
     url += '?'+par;
-
-    console.log(url)
-
+    
     request.get({url: url}, function(e, r, body) {
         if (e) {
             deferred.reject(new Error(e))

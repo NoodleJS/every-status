@@ -33,7 +33,8 @@ exports.shouldLogin = function(req, res, next) {
     //do redict
     if (req.session.user) {
         next()
-    } else if (req.cookie.token) {
+    } else if (req.cookies.token) {
+        
         var token = decodeToken(req.cookie.token)
         User.findOne({_id: token},function(err, it){
 
@@ -42,6 +43,8 @@ exports.shouldLogin = function(req, res, next) {
             if (it) {
                 next()
             } else {
+                //to login
+                console.log('to login')
                 res.redirect('/add')
             }
         })
