@@ -28,7 +28,7 @@ exports.getCodeCer = function(code) {
             "client_id": wb.appkey,
             "client_secret": wb.appsecret,
             "grant_type": 'authorization_code',
-            "redirect_uri": 'http://www.baidu.com',
+            "redirect_uri": 'http://www.every-status.com/users/login',
             "code": code
         });
     return _r;

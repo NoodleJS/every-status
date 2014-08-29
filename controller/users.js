@@ -41,6 +41,7 @@ exports.login = function(req, res) {
     }
 
     function doLogin(user) {
+        req.cookie.token = user._id;
         req.session.user = user;
         res.redirect('/');
     }

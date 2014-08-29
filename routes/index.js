@@ -5,6 +5,7 @@ var con = require('../controller/pieces');
 var user = require('../controller/users');
 var mock = require('../controller/mock');
 var connect = require('../proxy/connect');
+var login = require('../proxy/authorize');
 
 var rule_map = {
     "page":{
@@ -48,9 +49,8 @@ var rule_map = {
 global.env == 'development' && mock.godModel()
 
 
-router.get('/', function(req, res) {
+router.get('/', login.shouldLogin ,function(req, res) {
     //index 页面 
-
     //res.render('add', { title: '此刻...', name: 'add'})
     res.redirect('/add');
 })
