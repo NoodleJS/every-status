@@ -5,8 +5,9 @@ var User = require('../model/user');
 
 //处理用户登录逻辑
 
-function encodeToken(token) {
-
+exports.encodeToken = function(token) {
+    
+    token = typeof token == 'string' ? token : String(token)
     var secret = 'heiheihei';
     var cipher = crypto.createCipher('aes192', secret);
     var enc = cipher.update(token,'utf8','hex');
@@ -15,7 +16,8 @@ function encodeToken(token) {
 
 }
 
-function decodeToken(token) {
+
+exports.decodeToken = function(token) {
 
     var secret = 'heiheihei';
     var decipher = crypto.createDecipher('aes192', secret);
@@ -27,24 +29,22 @@ function decodeToken(token) {
 
 exports.shouldLogin = function(req, res, next) {
 
-    function hasCookie(cookie) {
-        console.log(cookie)
-    }
     //do redict
     if (req.session.user) {
         next()
     } else if (req.cookies.token) {
         
-        var token = decodeToken(req.cookie.token)
+        var token = exports.decodeToken(req.cookies.token)
+
         User.findOne({_id: token},function(err, it){
 
             if (err) throw new Error('Error when validate the login')
 
             if (it) {
+                req.session.user = it;
                 next()
             } else {
                 //to login
-                console.log('to login')
                 res.redirect('/add')
             }
         })

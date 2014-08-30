@@ -1,5 +1,6 @@
 var User = require('../model/user');
 var wb = require('../proxy/wblogin');
+var coder = require('../proxy/authorize');
 
 exports.create = function(req, res) {
   new User({
@@ -16,8 +17,9 @@ exports.create = function(req, res) {
 
 exports.login = function(req, res) {
 
-    if (global.env == 'development' && false) {
-        req.session.user = global.God;
+    if (global.env == 'development') {
+        
+        doLogin(global.God);
     } else {
         var code = req.query.code;
         wb.getToken(code)
@@ -41,8 +43,12 @@ exports.login = function(req, res) {
     }
 
     function doLogin(user) {
-        req.cookies.token = user._id;
+
         req.session.user = user;
+        console.log(String(user._id))
+        var token = coder.encodeToken(user._id);
+        console.log(token)
+        res.cookie('token', token,  { maxAge: 900000, httpOnly: false });
         res.redirect('/');
     }
 
