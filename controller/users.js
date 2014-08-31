@@ -16,14 +16,19 @@ exports.create = function(req, res) {
 }
 
 exports.login = function(req, res) {
-
+    
     if (global.env == 'development') {
         
         doLogin(global.God);
     } else {
         var code = req.query.code;
-        wb.getToken(code)
-            .then(handlerToken)
+        //do redir 
+        if (code) {
+            wb.getToken(code)
+                .then(handlerToken)    
+        } else {
+            res.redirect('https://api.weibo.com/oauth2/authorize?client_id=2830334342&redirect_uri=http://www.every-status.com/users/login&response_type=code');
+        }
     }
 
     function handlerToken(msg) {
@@ -45,10 +50,8 @@ exports.login = function(req, res) {
     function doLogin(user) {
 
         req.session.user = user;
-        console.log(String(user._id))
         var token = coder.encodeToken(user._id);
-        console.log(token)
-        res.cookie('token', token,  { maxAge: 900000, httpOnly: false });
+        res.cookie('token', token,  { maxAge: 3600 * 24 * 7, httpOnly: false });
         res.redirect('/');
     }
 
@@ -71,7 +74,7 @@ exports.login = function(req, res) {
 }
 
 exports.logout = function(req, res) {
-
+    res.clearCookie('token');
     req.session.user = null;
     res.redirect('/');
     

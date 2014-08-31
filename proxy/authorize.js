@@ -30,6 +30,7 @@ exports.decodeToken = function(token) {
 exports.shouldLogin = function(req, res, next) {
 
     //do redict
+
     if (req.session.user) {
         next()
     } else if (req.cookies.token) {
@@ -39,18 +40,17 @@ exports.shouldLogin = function(req, res, next) {
         User.findOne({_id: token},function(err, it){
 
             if (err) throw new Error('Error when validate the login')
-
             if (it) {
                 req.session.user = it;
                 next()
             } else {
                 //to login
-                res.redirect('/add')
+                res.redirect('/users/login')
             }
         })
 
     } else {
-        res.redirect('/add')
+        res.redirect('/users/login')
     }
 }
 

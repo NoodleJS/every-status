@@ -3,7 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/css/base.css')
-    link(rel='stylesheet', href='/css/#{name}.css')
+    if name
+      link(rel='stylesheet', href='/css/#{name}.css')
     link(rel='shortcut icon', href='/favicon.ico')
   meta(name='apple-itunes-app', content='app-id=669860898')
   meta(name='viewport', content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0')
@@ -19,22 +20,20 @@ html
           img.avatar(src='#{user.avatar}')
         else 
           img.avatar(src='/img/default-avatar.png')
-        ul.menu(style='display:none')
+        ul.menu
           if user
             li.menu-item
-              a#write-note(href='/new') 记一句
+              a#write-note(href='/add') 写一点
             li.menu-item
-              a#write-note(href='/people/$user[', id"]"='') 我的茴香
+              a#write-note(href='/pieces') 我的时刻
             li.menu-item
-              a(href='/tools') 工具盒
-            li.menu-item
-              a(href='/logout') 退出
+              a(href='/users/logout') 退出
           else
             li.menu-item
               a.login_douban(href='#')
                 img(src='http://img3.douban.com/pics/douban-icons/favicon_24x24.png', title='豆瓣登录')
             li.menu-item
-              a.login_weibo(href='#')
+              a.login_weibo(href='/users/login')
                 img(src='http://www.sinaimg.cn/blog/developer/wiki/LOGO_24x24.png', title='微博登录')
     #bd
       block content

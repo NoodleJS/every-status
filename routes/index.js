@@ -7,58 +7,20 @@ var mock = require('../controller/mock');
 var connect = require('../proxy/connect');
 var login = require('../proxy/authorize');
 
-var rule_map = {
-    "page":{
-        "/": "index",
-        '/new': 'new',
-        '/piece/(\d+)': 'piece',
-        '/people/(\d+)': 'people',
-        '/login': 'login',
-        '/logout': 'logout',
-        '/tools': 'tools',
-        '/about': 'about',
-        '/app': 'app',
-        '/bookmarklet': 'bookmarklet',
-        '/auth/(douban|weibo)': 'auth',
-        '/auth/redirect/(douban|weibo)': 'auth_redirect',
-    },
-    //慢慢废掉
-    "ajax":{
-        '/userinfo':'userinfo',
-        '/mine/favs':'myfavs',
-        '/authuser':'authuser',
-        '/add':'add',
-        '/fav':'fav',
-        '/unfav':'unfav',
-        '/pieces':'pieces',
-    },
-    "api":{
-        '/userinfo':'userinfo',
-        '/mine/favs':'myfavs',
-        '/authuser':'authuser',
-        '/add':'add',
-        '/fav':'fav',
-        '/unfav':'unfav',
-        '/remove':'remove',
-        '/pieces':'pieces',
-        '/upload/token':'uploadtoken',
-        '/upload/callback':'uploadcallback'
-    }
-}
 
 global.env == 'development' && mock.godModel()
 
 
-router.get('/', login.shouldLogin ,function(req, res) {
+router.get('/' ,function(req, res) {
     //index 页面 
-    //res.render('add', { title: '此刻...', name: 'add'})
+    res.render('index', { title: '此刻...', name: 'add', user: req.session.user})
     
-    res.redirect('/add');
+    //res.redirect('/add');
 })
 
-router.get('/add', function(req, res) {
+router.get('/add', login.shouldLogin, function(req, res) {
     //渲染页面
-    res.render('add', { title: '此刻...', name: 'add'})
+    res.render('add', { title: '此刻...', name: 'add', user: req.session.user})
 })
 
 router.post('/add', con.create) 

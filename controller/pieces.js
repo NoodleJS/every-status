@@ -31,9 +31,6 @@ exports.list = function(req, res) {
           favs: pieces
       })  
   })
-
-  
-
 }
 
 exports.show = function(req, res) {
@@ -51,7 +48,8 @@ exports.show = function(req, res) {
     res.render('piece', {
       titel: '每思每刻',
       name: 'piece',
-      piece: piece
+      piece: piece,
+      user: req.session.user
     })
   })
 }

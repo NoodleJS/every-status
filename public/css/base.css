@@ -69,6 +69,12 @@ input[type=text] {
   text-align: center;
   float: right;
 }
+#hd .account .menu {
+  display: none;
+}
+#hd .account:hover .menu {
+  display: block;
+}
 #hd .account .avatar {
   width: 32px;
   height: 32px;
