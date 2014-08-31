@@ -3,10 +3,6 @@ extends layout
 block content
 
 
-  -var favs,liked,fav_count;
-  
-  - fav_count = 1;
-  - favs = ['elrrrrrrr']
 
     .piece(class= piece.pics ? 'withpic' : '' )
       .piece-inner
@@ -36,13 +32,13 @@ block content
                 ul(class= liked ? 'liked' : 'liked')
                   if user
                     li
-                      a(href="/people/1")
-                        img(src="http://img3.douban.com/icon/u13481323-4.jpg")
+                      a(href="/people/#{user}")
+                        img(src="#{user.avatar}")
                   for faver in favs
-                    if !(user && user.id!=faver.id)
+                    if (user.id!=faver.id)
                       li
                         a(href="/people")
-                          img(src="http://img3.douban.com/icon/u13481323-4.jpg")
+                          img(src="#{user.avatar}")
                   if fav_count
                     .fav-count 等
                       span.count #{fav_count}人喜欢

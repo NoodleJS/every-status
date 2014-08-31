@@ -49,7 +49,10 @@ exports.show = function(req, res) {
       titel: '每思每刻',
       name: 'piece',
       piece: piece,
-      user: req.session.user
+      user: req.session.user,
+      favs: [req.session.user],
+      liked: false,
+      fav_count: 1
     })
   })
 }
