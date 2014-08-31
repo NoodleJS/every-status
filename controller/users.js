@@ -13,9 +13,10 @@ exports.show = function(req, res) {
         
         if (it) {
             it.populate('pieces', function(err, set) {
-                
+
                 res.render('user', { title: '今天...', 
                   name: 'people',
+                  user: set,
                   tuser: set,
                   current: user, 
                   pages: 1,

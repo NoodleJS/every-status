@@ -37,6 +37,7 @@ exports.list = function(req, res) {
       res.render('user', { title: '今天...', 
           name: 'people',
           user: req.session.user,
+          tuser: req.session.user,
           current: req.session.user, 
           pages: 1,
           index: 1,
