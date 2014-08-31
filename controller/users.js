@@ -16,7 +16,7 @@ exports.show = function(req, res) {
                 
                 res.render('user', { title: '今天...', 
                   name: 'people',
-                  user: set,
+                  tuser: set,
                   current: user, 
                   pages: 1,
                   index: 1,
