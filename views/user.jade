@@ -3,18 +3,18 @@ extends layout
 block content
 
   //- need var : user,favs,current,index,pages
-  //- user所查看用户,current当前用户,index当前分页,favs收藏,pages总页数
+  //- tuser所查看用户,current当前用户,index当前分页,favs收藏,pages总页数
   
   div#people
     div.avatar
-      img(src='#{user.avatar}', alt='#{user.name}')
-    if user && user.name == current.name
+      img(src='#{tuser.avatar}', alt='#{tuser.name}')
+    if tuser && tuser.name == current.name
       div.share
-        if user.douban_access_token
+        if tuser.douban_access_token
           a.sharebtn.active.todouban(href='javascript:;', data-type='douban', title='已绑定豆瓣')
         else 
           a.sharebtn.todouban(href='javascript:;', data-type='douban', title='绑定豆瓣')
-        if user.wbId
+        if tuser.wbId
           a.sharebtn.active.toweibo(href='javascript:;', data-type='weibo', title='已绑定微博')
         else 
           a.sharebtn.toweibo(href='javascript:;', data-type='weibo', title='绑定微博')
@@ -26,7 +26,7 @@ block content
   div.favs
     each fav in favs
       div.piece(data-id='#{fav.id}')
-        if current && user && current.id == user.id
+        if current && tuser && current.id == tuser.id
           div.del.icon-times
         div.piece-body
           div.content

@@ -1,9 +1,6 @@
 extends layout
 
 block content
-
-
-
     .piece(class= piece.pics ? 'withpic' : '' )
       .piece-inner
         .piece-main
@@ -32,7 +29,7 @@ block content
                 ul(class= liked ? 'liked' : 'liked')
                   if user
                     li
-                      a(href="/people/#{user}")
+                      a(href="/users/#{user.id}")
                         img(src="#{user.avatar}")
                   for faver in favs
                     if (user.id!=faver.id)
