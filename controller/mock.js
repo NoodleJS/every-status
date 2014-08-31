@@ -25,7 +25,7 @@ exports.godModel = function(req, res, cb) {
 
     //access global model
     
-    User.findOne({name: 'elrrrrrrr'}, function(err, user) {
+    User.findOne({name: 'Elrrrrrrr'}, function(err, user) {
 
         global.God = user;
         

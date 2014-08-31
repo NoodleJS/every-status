@@ -33,7 +33,7 @@ router.get('/god', function(req, res) {
 
 })
 
-router.get('/pieces', con.list);
+router.get('/pieces', login.shouldLogin, con.list);
 
 router.get('/piece/:id', con.show);
 

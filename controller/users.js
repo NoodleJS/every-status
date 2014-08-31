@@ -2,23 +2,37 @@ var User = require('../model/user');
 var wb = require('../proxy/wblogin');
 var coder = require('../proxy/authorize');
 
-exports.create = function(req, res) {
-  new User({
-    name: req.body.name,
-    avatar: req.body.avatar,
-    work: true
+exports.show = function(req, res) {
 
-  }).save(function(err) {
-    if(err) {
-      console.log(err)
-    }
-  })
+    var user = req.session.user;
+    var id = req.params.id;
+
+    User.findOne({id: id}, function(err, it) {
+        
+        if (err) throw new Error('Error In DB');
+        
+        if (it) {
+            it.populate('pieces', function(err, set) {
+                
+                res.render('user', { title: '今天...', 
+                  name: 'people',
+                  user: set,
+                  current: user, 
+                  pages: 1,
+                  index: 1,
+                  favs: set.pieces
+                })  
+            })
+            
+        } else {
+            res.redirect('/')
+        }
+    })
 }
 
 exports.login = function(req, res) {
     
-    if (global.env == 'development') {
-        
+    if (global.env == 'development' ) {
         doLogin(global.God);
     } else {
         var code = req.query.code;

@@ -1,19 +1,31 @@
 var Piece = require('../model/piece');
+var User = require('../model/user');
 
 exports.create = function(req, res) {
-
+  var user = req.session.user;
   
   new Piece({
     content: req.body.content,
     link: req.body.link,
     work: true, 
-    author: req.session.user._id
+    author: user._id
   }).save(function(e, it) {
     if(e) throw new Error('error in save ');
-    res.redirect('/piece/' + it.id)
+    user.pieces.push(it._id)
+    res.redirect('/piece/' + it.id);
+    syncUser(user);
   });
+
   
 }
+
+function syncUser(user){
+  User.update({name: user.name}, {pieces: user.pieces}, function(err) {
+    console.log(err)
+    if (err) throw new Error('error in user ');
+  })
+}
+
 
 exports.list = function(req, res) {
 
@@ -25,7 +37,7 @@ exports.list = function(req, res) {
       res.render('user', { title: '今天...', 
           name: 'people',
           user: req.session.user,
-          current: req.session.user._id, 
+          current: req.session.user, 
           pages: 1,
           index: 1,
           favs: pieces
