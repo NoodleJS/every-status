@@ -4,7 +4,7 @@ var coder = require('../proxy/authorize');
 
 exports.show = function(req, res) {
 
-    var user = req.session.user;
+    var user = req.session.user || {};
     var id = req.params.id;
 
     User.findOne({id: id}, function(err, it) {
