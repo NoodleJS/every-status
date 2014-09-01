@@ -4,6 +4,7 @@ var router = express.Router();
 var con = require('../controller/pieces');
 var user = require('../controller/users');
 var mock = require('../controller/mock');
+var index = require('../controller/index');
 var connect = require('../proxy/connect');
 var login = require('../proxy/authorize');
 
@@ -11,12 +12,7 @@ var login = require('../proxy/authorize');
 global.env == 'development' && mock.godModel()
 
 
-router.get('/' ,function(req, res) {
-    //index 页面 
-    res.render('index', { title: '此刻...', name: 'add', user: req.session.user})
-    
-    //res.redirect('/add');
-})
+router.get('/' ,index.index)
 
 router.get('/add', login.shouldLogin, function(req, res) {
     //渲染页面
@@ -35,6 +31,6 @@ router.get('/god', function(req, res) {
 
 router.get('/pieces', login.shouldLogin, con.list);
 
-router.get('/piece/:id', con.show);
+router.get('/piece/:id', login.shouldLogin, con.show);
 
 module.exports = router;

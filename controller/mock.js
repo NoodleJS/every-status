@@ -20,7 +20,6 @@ exports.clean = function(req, res) {
     return
 }
 
-
 exports.godModel = function(req, res, cb) {
 
     //access global model

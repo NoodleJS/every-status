@@ -9,5 +9,9 @@
   "wb": {
     "appkey": "2830334342",
     "appsecret": "9bae73378a9ce4a22cc3b905e049568f"
+  },
+  "douban": {
+    "appkey": "00fa3435f8ece7f602ee9ca1eac6b7e2",
+    "appsecret": "a06cea4059c6a1ee"
   }
 }
