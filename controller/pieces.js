@@ -32,20 +32,23 @@ exports.list = function(req, res) {
   //default display
   req.session.user = req.session.user || {}
 
-  Piece.find({author: req.session.user._id},function(err, pieces) { 
-      if (err) throw err
-      res.render('user', { title: '今天...', 
-          name: 'people',
-          user: req.session.user,
-          tuser: req.session.user,
-          current: req.session.user, 
-          pages: 1,
-          index: 1,
-          favs: pieces
-      })  
-  })
-}
+  Piece.find({author: req.session.user._id})
+      .sort('-created')
+      .exec(handlerData);
 
+      function handlerData(err, pieces){
+        if (err) throw err
+        res.render('user', { title: '今天...', 
+            name: 'people',
+            user: req.session.user,
+            tuser: req.session.user,
+            current: req.session.user, 
+            pages: 1,
+            index: 1,
+            favs: pieces
+        })  
+      }
+}
 exports.show = function(req, res) {
 
   var id = req.params.id;

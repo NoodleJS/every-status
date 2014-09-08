@@ -1,7 +1,11 @@
 var Piece = require('../model/piece');
 
 exports.index = function(req, res) {
-    Piece.find({}, function(err, set) {
+    Piece.find({})
+        .sort('-created')
+        .exec(handlerData)
+
+    function handlerData(err, set) {
         if (err) console.log(err)
         if (set) {
             res.render('index', {
@@ -10,6 +14,6 @@ exports.index = function(req, res) {
                 user: req.session.user, 
                 favs:set})
         }
-    })
+    }
 }
 
