@@ -1,3 +1,4 @@
+
 var Piece = require('../model/piece');
 var User = require('../model/user');
 
@@ -25,7 +26,6 @@ function syncUser(user){
     if (err) throw new Error('error in user ');
   })
 }
-
 
 exports.list = function(req, res) {
 
