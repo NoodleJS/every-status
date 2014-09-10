@@ -7,11 +7,18 @@
     "dbname":"dev"
   },
   "wb": {
-    "appkey": "2830334342",
-    "appsecret": "9bae73378a9ce4a22cc3b905e049568f"
+    "appkey": "570163441",
+    "appsecret": "4eaeaec2bce1f13385ed78e255f5b5bf",
+    "codeUrl":"http://www.baidu.com",
+    "tokenUrl":"https://api.weibo.com/oauth2/access_token",
+    "infoUrl":"https://api.weibo.com/2/users/show.json"
   },
   "douban": {
     "appkey": "00fa3435f8ece7f602ee9ca1eac6b7e2",
-    "appsecret": "a06cea4059c6a1ee"
+    "appsecret": "a06cea4059c6a1ee",
+    "codeUrl":"http://www.every-status.com/users/login",
+    "tokenUrl":"https://www.douban.com/service/auth2/token",
+    "infoUrl":"https://api.douban.com/v2/user/~me"
   }
 }
+

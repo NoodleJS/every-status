@@ -33,7 +33,7 @@ exports.show = function(req, res) {
 
 exports.login = function(req, res) {
     
-    if (global.env == 'development' ) {
+    if (global.env == 'development' && false) {
         doLogin(global.God);
     } else {
         var code = req.query.code;

@@ -4,15 +4,17 @@ var request = require('request');
 var Q = require('q');
 
 var env = global.env || 'development'; 
-var wb = {};
+var wb,db = {};
 
 if (env == 'development'){
 
     wb = require('../settings.example.json').wb
+    db = require('../settings.example.json').db
 
 } else if (env == 'production') {
 
     wb = require('../settings.json').wb
+    db = require('../settings.json').db
 
 } else {
 
@@ -23,22 +25,43 @@ if (env == 'development'){
 //2. 根据code appkey appserect 获取token
 //3. 根据token 获取用户信息
 
-exports.getCodeCer = function(code) {
-    var _r =  querystring.stringify({
+exports.getCodeCer = function(code, type) {
+    var _r ;
+    type = type || 'wb';
+
+    if (type=='db') {
+        _r =  querystring.stringify({
+            "client_id": db.appkey,
+            "client_secret": db.appsecret,
+            "grant_type": 'authorization_code',
+            "redirect_uri": db.codeUrl,
+            "code": code
+        });
+    } else {
+        _r =  querystring.stringify({
             "client_id": wb.appkey,
             "client_secret": wb.appsecret,
             "grant_type": 'authorization_code',
-            "redirect_uri": 'http://www.every-status.com/users/login',
+            "redirect_uri": wb.codeUrl,
             "code": code
         });
+    }
+    
     return _r;
 }
 
-exports.getToken = function (code) {
+exports.getToken = function (code, type) {
+    var url;
+    var post_data = this.getCodeCer(code, type);
 
-    var post_data = this.getCodeCer(code);
-
-    var url = 'https://api.weibo.com/oauth2/access_token?'+post_data
+    type = type || 'wb'
+    
+    if (type == 'db') {
+        url = db.tokenUrl+'?'+post_data;    
+    } else {
+        url = wb.tokenUrl+'?'+post_data;    
+    }
+    
 
     var deferred = Q.defer();
 
@@ -59,7 +82,7 @@ exports.getInfo = function (token) {
 
     var deferred = Q.defer();
 
-    var url = 'https://api.weibo.com/2/users/show.json';
+    var url = db.infoUrl;
 
     var par = querystring.stringify({
         access_token: access_token,
