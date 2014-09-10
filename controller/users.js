@@ -32,21 +32,27 @@ exports.show = function(req, res) {
 }
 
 exports.login = function(req, res) {
-    
+    var type = req.params.type || 'wb'
     if (global.env == 'development' && false) {
         doLogin(global.God);
     } else {
         var code = req.query.code;
         //do redir 
         if (code) {
-            wb.getToken(code)
+            wb.getToken(code, type)
                 .then(handlerToken)    
         } else {
-            res.redirect('https://api.weibo.com/oauth2/authorize?client_id=2830334342&redirect_uri=http://www.every-status.com/users/login&response_type=code');
+            if (type=='wb') {
+                res.redirect('https://api.weibo.com/oauth2/authorize?client_id=2830334342&redirect_uri=http://www.every-status.com/users/login&response_type=code');    
+            } else {
+                res.redirect('https://www.douban.com/service/auth2/auth?client_id=051b66b9c014efa10f52342d403ecee3&redirect_uri=http://www.baidu.com&response_type=code');
+            }
+            
         }
     }
 
     function handlerToken(msg) {
+        console.log(msg)
         var uid = msg.uid;
         var token = msg.token;
         //resgin or login 

@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 
 
 
-router.get('/login', con.login);
+router.get('/login/:type', con.login);
 
 router.get('/logout', con.logout);
 
