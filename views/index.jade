@@ -16,7 +16,7 @@ block content
           div.addtime
               if fav.created
                   - var t = new Date(fav.created)
-                  = t.getFullYear() + '-' + t.getMonth() + '-' +t.getDate()
+                  = t.getFullYear() + '-' + (t.getMonth()+ 1) + '-' +t.getDate()
 
               
 
