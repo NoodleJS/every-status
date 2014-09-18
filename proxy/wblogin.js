@@ -64,7 +64,7 @@ exports.getToken = function (code, type) {
     
 
     var deferred = Q.defer();
-    console.log(url);
+    
     request.post({url:url}, function(e, r, body) {
         if (e) {
             deferred.reject(new Error(e))   
@@ -105,11 +105,3 @@ exports.getInfo = function (token, type) {
 }
 
 module.exports = exports
-
-function handlerToken(e) {
-    console.log(e)
-}
-var code = '1234';
-var type = 'db';
-exports.getToken(code, type)
-                .then(handlerToken)    
