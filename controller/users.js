@@ -52,7 +52,7 @@ exports.login = function(req, res) {
     }
 
     function handlerToken(msg) {
-        console.log(msg)
+        
         var uid = msg.uid;
         var token = msg.token;
         //resgin or login 

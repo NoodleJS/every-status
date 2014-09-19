@@ -105,3 +105,4 @@ exports.getInfo = function (token, type) {
 }
 
 module.exports = exports
+
