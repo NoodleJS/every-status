@@ -1,6 +1,8 @@
+var querystring = require('querystring');
 var User = require('../model/user');
 var wb = require('../proxy/wblogin');
 var coder = require('../proxy/authorize');
+var setting = require('../proxy/getconfig');
 
 exports.show = function(req, res) {
 
@@ -43,7 +45,13 @@ exports.login = function(req, res) {
                 .then(handlerToken)    
         } else {
             if (type=='wb') {
-                res.redirect('https://api.weibo.com/oauth2/authorize?client_id=2830334342&redirect_uri=http://www.every-status.com/users/login&response_type=code');    
+                var setting = setting.wb;
+                var query = querystring.stringify({
+                    client_id: setting.appkey,
+                    redirect_uri: setting.codeUrl,
+                    response_type: 'code'
+                })
+                res.redirect('https://api.weibo.com/oauth2/authorize?'+query);    
             } else {
                 res.redirect('https://www.douban.com/service/auth2/auth?client_id=051b66b9c014efa10f52342d403ecee3&redirect_uri=http://www.baidu.com&response_type=code');
             }
