@@ -2,7 +2,7 @@ var querystring = require('querystring');
 var User = require('../model/user');
 var wb = require('../proxy/wblogin');
 var coder = require('../proxy/authorize');
-var setting = require('../proxy/getconfig');
+var config = require('../proxy/getconfig');
 
 exports.show = function(req, res) {
 
@@ -40,12 +40,21 @@ exports.login = function(req, res) {
     } else {
         var code = req.query.code;
         //do redir 
+        //
+        if (code && type=='db') {
+            wb.getToken(code, type)
+                .then(function(msg) {
+                    handlerDb(msg, req, res)
+                })
+        }
         if (code) {
             wb.getToken(code, type)
-                .then(handlerToken)    
+                .then(function(msg){
+                    handlerToken(msg, req, res)   
+                })    
         } else {
             if (type=='wb') {
-                var setting = setting.wb;
+                var setting = config.wb;
                 var query = querystring.stringify({
                     client_id: setting.appkey,
                     redirect_uri: setting.codeUrl,
@@ -53,14 +62,42 @@ exports.login = function(req, res) {
                 })
                 res.redirect('https://api.weibo.com/oauth2/authorize?'+query);    
             } else {
-                res.redirect('https://www.douban.com/service/auth2/auth?client_id=051b66b9c014efa10f52342d403ecee3&redirect_uri=http://www.baidu.com&response_type=code');
+                
+                var setting = config.db;
+                var query = querystring.stringify({
+                    client_id: setting.appkey,
+                    redirect_uri: setting.codeUrl,
+                    response_type: 'code', 
+                })
+                res.redirect('https://www.douban.com/service/auth2/auth?'+query);
             }
             
         }
     }
 
-    function handlerToken(msg) {
-        
+    function handlerDb(msg, req, res) {
+        var did = msg['douban_user_id'],
+            token = msg['access_token'];
+        User.findOne({dbId: did}, function(err, user) {
+            if (err) throw new Error('Error when find dbuser');
+            if (user) {
+                doLogin(user, req, res);
+            } else {
+                dbsignUp(msg, req, res);
+            }
+        })
+    }
+
+    function dbsignUp(msg, req, res) {
+        wb.getDbInfo(msg)
+            .then(function(msg) {
+                addDbUser(msg, req, res)
+            });
+    }
+
+
+    function handlerToken(msg, req, res) {
+
         var uid = msg.uid;
         var token = msg.token;
         //resgin or login 
@@ -68,15 +105,15 @@ exports.login = function(req, res) {
             if (err) throw new Error('Error In DB');
             if (user) {
                 //login
-                doLogin(user);
+                doLogin(user, req, res);
             } else {
                 //regsin
-                signUp(msg);
+                signUp(msg, req, res);
             }
         })
     }
 
-    function doLogin(user) {
+    function doLogin(user, req, res) {
 
         req.session.user = user;
         var token = coder.encodeToken(user._id);
@@ -84,22 +121,35 @@ exports.login = function(req, res) {
         res.redirect('/');
     }
 
-    function signUp(msg) {
+    function signUp(msg, req, res) {
         wb.getInfo(msg)
-            .then(addUser)
+            .then(function(msg, req, res) {
+                addUser(msg, req, res)
+            })
     }
 
     //add user by msg from api
-    function addUser(msg) {
+    function addUser(msg, req, res) {
         new User({
             name: msg.name,
             wbId: msg.id,
             avatar: msg.profile_image_url
         }).save(function(err, user) {
             if (err) throw new Error('Error In addUser'); 
-            doLogin(user)
+            doLogin(user, req, res)
         })
-    }     
+    }  
+
+    function addDbUser(msg) {
+        new User({
+            name: msg.name,
+            dbId: msg.id,
+            avatar: msg.avatar
+        }).save(function(err, user) {
+            if (err) throw new Error('Error In addDbUser'); 
+            doLogin(user, req, res)
+        })
+    }   
 }
 
 exports.logout = function(req, res) {
