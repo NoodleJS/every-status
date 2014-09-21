@@ -3,6 +3,7 @@ var User = require('../model/user');
 var wb = require('../proxy/wblogin');
 var coder = require('../proxy/authorize');
 var config = require('../proxy/getconfig');
+var Q = require('q');
 
 exports.show = function(req, res) {
 
@@ -34,24 +35,28 @@ exports.show = function(req, res) {
 }
 
 exports.login = function(req, res) {
+    
     var type = req.params.type || 'wb'
     if (global.env == 'development' && false) {
         doLogin(global.God);
     } else {
         var code = req.query.code;
         //do redir 
-        //
-        if (code && type=='db') {
-            wb.getToken(code, type)
+        
+        if (code) {
+            if (type == 'db') {
+                wb.getToken(code, type)
                 .then(function(msg) {
                     handlerDb(msg, req, res)
                 })
-        }
-        if (code) {
-            wb.getToken(code, type)
-                .then(function(msg){
-                    handlerToken(msg, req, res)   
-                })    
+            } else if (type == 'wb') {
+                wb.getToken(code, type)
+                    .then(function(msg){
+                        
+                        handlerToken(msg, req, res)   
+                    })      
+            }
+            
         } else {
             if (type=='wb') {
                 var setting = config.wb;
@@ -78,7 +83,7 @@ exports.login = function(req, res) {
     function handlerDb(msg, req, res) {
         var did = msg['douban_user_id'],
             token = msg['access_token'];
-        User.findOne({dbId: did}, function(err, user) {
+        User.findOne({dbId: did}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
             if (user) {
                 doLogin(user, req, res);
@@ -97,7 +102,7 @@ exports.login = function(req, res) {
 
 
     function handlerToken(msg, req, res) {
-
+        
         var uid = msg.uid;
         var token = msg.token;
         //resgin or login 
@@ -114,29 +119,38 @@ exports.login = function(req, res) {
     }
 
     function doLogin(user, req, res) {
-
-        req.session.user = user;
+        
+        if ('session' in req) {
+            (req.session.user = user);    
+        }
         var token = coder.encodeToken(user._id);
+
         res.cookie('token', token,  { maxAge: 3600 * 24 * 7, httpOnly: false });
         res.redirect('/');
+        
+        return
     }
 
     function signUp(msg, req, res) {
+        
         wb.getInfo(msg)
-            .then(function(msg, req, res) {
+            .then(function(msg) {
                 addUser(msg, req, res)
             })
     }
 
     //add user by msg from api
     function addUser(msg, req, res) {
+        
         new User({
             name: msg.name,
             wbId: msg.id,
             avatar: msg.profile_image_url
         }).save(function(err, user) {
             if (err) throw new Error('Error In addUser'); 
+            
             doLogin(user, req, res)
+            
         })
     }  
 
@@ -148,6 +162,7 @@ exports.login = function(req, res) {
         }).save(function(err, user) {
             if (err) throw new Error('Error In addDbUser'); 
             doLogin(user, req, res)
+            
         })
     }   
 }

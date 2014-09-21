@@ -46,8 +46,6 @@ exports.getCodeCer = function(code, type) {
             "code": code
         };
     }
-
-    console.log(_r)
     
     return _r;
 }
@@ -107,16 +105,13 @@ exports.getDbInfo = function(msg) {
     })
     return deferred.promise;
 }
-exports.getInfo = function (token, type) {
-    type = type || 'wb';
-
+exports.getInfo = function (token) {
+    
     var access_token = token.access_token;
     var uid = token.uid;
-    var url;
+    var url = wb.infoUrl;
 
     var deferred = Q.defer();
-
-    url = type=='db' ? db.infoUrl : wb.infoUrl;
 
     var par = querystring.stringify({
         access_token: access_token,
@@ -129,7 +124,6 @@ exports.getInfo = function (token, type) {
         if (e) {
             deferred.reject(new Error(e))
         } else {
-            
             deferred.resolve(JSON.parse(body))
         }
     })
