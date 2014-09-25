@@ -1,0 +1,9 @@
+{
+  "spm": {
+    "dependencies": {
+      "jquery": "2.1.1",
+      "seajs": "2.3.0",
+      "seajs-wrap": "1.0.1"
+    }
+  }
+}
