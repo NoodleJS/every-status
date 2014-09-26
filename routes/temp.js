@@ -29,4 +29,8 @@ router.get('/showPieces', function(req, res) {
     })
     
 })
+
+router.get('/wb', function(req, res) {
+    res.render('wb')
+})
 module.exports = router;
