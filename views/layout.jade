@@ -8,6 +8,7 @@ html
     link(rel='shortcut icon', href='/favicon.ico')
     script(src='../spm_modules/seajs/2.3.0/dist/sea.js')
     script(src='../spm_modules/seajs-wrap/1.0.1/dist/seajs-wrap.js')
+
     script.
         seajs.config({
             base: "/spm_modules/",
@@ -20,6 +21,7 @@ html
   | <meta property="wb:webmaster" content="0ef8bb0ecec85d2f" />
   body
     #hd
+      #wb_connect_btn(style="float: left")
       .tt
         a(href='/')
           span.quote 「 
@@ -52,3 +54,17 @@ html
       a#about(href='javascript:;') 关于
       if ENV == "DEV"
         a(href='javascript:;') DEV          
+  | <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=858047680" type="text/javascript" charset="utf-8"></script>
+  script.
+      WB2.anyWhere(function(W){
+          W.widget.connectButton({
+              id: "wb_connect_btn",   
+              type:"3,2",
+              callback : {
+                  login:function(o){  //登录后的回调函数
+                  },  
+                  logout:function(){  //退出后的回调函数
+                  }
+              }
+          });
+      });
