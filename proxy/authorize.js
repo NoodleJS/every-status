@@ -45,12 +45,12 @@ exports.shouldLogin = function(req, res, next) {
                 next()
             } else {
                 //to login
-                res.redirect('/users/login')
+                res.redirect('/')
             }
         })
 
     } else {
-        res.redirect('/users/login')
+        res.redirect('/')
     }
 }
 
