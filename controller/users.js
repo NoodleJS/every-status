@@ -1,5 +1,6 @@
 var querystring = require('querystring');
 var User = require('../model/user');
+var Piece = require('../model/piece');
 var wb = require('../proxy/wblogin');
 var coder = require('../proxy/authorize');
 var config = require('../proxy/getconfig');
@@ -172,5 +173,32 @@ exports.logout = function(req, res) {
     req.session.user = null;
     res.redirect('/');
     
+}
+
+function syncUser(user){
+  User.update({name: user.name}, {pieces: user.pieces}, function(err) {
+    console.log(err)
+    if (err) throw new Error('error in user ');
+  })
+}
+
+exports.fav = function(req, res) {
+    var pieceId = req.params.id,
+        user = req.session.user || {};
+
+    Piece.findOne({id: pieceId}, function(err, it) {
+        if (err) throw new Error('Error when find the pieces');
+
+        if (it) {
+            user.favs.push(it._id);
+            res.send(it);
+            syncUser(user);
+        } else {
+            res.send({'msg': 'no match'});
+        }
+    })
+
+
+
 }
 
