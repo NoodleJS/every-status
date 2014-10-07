@@ -38,8 +38,10 @@ exports.show = function(req, res) {
 exports.login = function(req, res) {
     
     var type = req.params.type || 'wb'
-    if (global.env == 'development' && false) {
-        doLogin(global.God);
+    if (global.env == 'development') {
+        console.log(global.God)
+        doLogin(global.God, req, res);
+
     } else {
         var code = req.query.code;
         //do redir 
