@@ -29,11 +29,9 @@ exports.godModel = function(req, res, cb) {
 
     User.findOne({
         name: 'Elrrrrrrr'
-    }, function(err, user) {
-
-        doLogin(user, req, res);
-
-    })
+    }, 
+        cb && cb()
+    )
 
 }
 
