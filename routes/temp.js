@@ -33,7 +33,10 @@ router.get('/showPieces', function(req, res) {
 
 router.get('/fav/:id', con.fav)
 
+router.get('/nofav/:id', con.nofav)
+
 router.get('/wb', function(req, res) {
     res.render('wb')
 })
+
 module.exports = router;

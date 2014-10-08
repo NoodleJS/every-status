@@ -38,7 +38,7 @@ exports.show = function(req, res) {
 exports.login = function(req, res) {
     
     var type = req.params.type || 'wb'
-    if (global.env == 'development') {
+    if (global.env == 'development' && false) {
         console.log(global.God)
         doLogin(global.God, req, res);
 
@@ -178,7 +178,7 @@ exports.logout = function(req, res) {
 }
 
 function syncUser(user){
-  User.update({name: user.name}, {pieces: user.pieces}, function(err) {
+  User.update({name: user.name}, {pieces: user.pieces}, {favs: user.favs}, function(err) {
     console.log(err)
     if (err) throw new Error('error in user ');
   })
@@ -187,6 +187,11 @@ function syncUser(user){
 exports.fav = function(req, res) {
     var pieceId = req.params.id,
         user = req.session.user || {};
+
+    if (Object.keys(user).length == 0) {
+        res.redirect('/');
+        return
+    }
 
     Piece.findOne({id: pieceId}, function(err, it) {
         if (err) throw new Error('Error when find the pieces');
@@ -199,8 +204,31 @@ exports.fav = function(req, res) {
             res.send({'msg': 'no match'});
         }
     })
+}
 
+exports.nofav = function(req, res) {
+    var pieceId = req.params.id,
+        user = req.session.user || {};
 
+    if (Object.keys(user).length == 0) {
+        res.redirect('/');
+        return
+    }
 
+    Piece.findOne({id: pieceId}, function(err, it) {
+        if (err) throw new Error('Error when find the pieces');
+
+        if (it) {
+            // user.favs.push(it._id);
+            var index = user.favs.indexOf(pieceId);
+            console.log(index)
+            index > -1 && user.favs.splice(index);
+            console.log(user.favs)
+            res.send(it);
+            syncUser(user);
+        } else {
+            res.send({'msg': 'no match'});
+        }
+    })
 }
 
