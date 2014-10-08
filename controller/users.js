@@ -197,7 +197,7 @@ exports.fav = function(req, res) {
         if (err) throw new Error('Error when find the pieces');
 
         if (it) {
-            user.favs.push(it._id);
+            user.favs.push(it.id);
             res.send(it);
             syncUser(user);
         } else {
@@ -221,9 +221,7 @@ exports.nofav = function(req, res) {
         if (it) {
             // user.favs.push(it._id);
             var index = user.favs.indexOf(pieceId);
-            console.log(index)
             index > -1 && user.favs.splice(index);
-            console.log(user.favs)
             res.send(it);
             syncUser(user);
         } else {
