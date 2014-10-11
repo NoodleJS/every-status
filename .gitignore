@@ -1,4 +1,5 @@
 node_modules
+public/spm_modules
 config_migrant.py
 .anvil
 .DS_Store

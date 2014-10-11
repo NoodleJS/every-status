@@ -9,9 +9,6 @@ var connect = require('../proxy/connect');
 var login = require('../proxy/authorize');
 
 
-global.env == 'development' && mock.godModel()
-
-
 router.get('/' ,index.index)
 
 router.get('/add', login.shouldLogin, function(req, res) {
@@ -23,11 +20,7 @@ router.post('/add', con.create)
 
 router.get('/fake', mock.addUser)
 
-router.get('/god', function(req, res) {
-    //ugly ...
-    mock.godModel(req, res, connect.sendOk)  
-
-})
+router.get('/god', mock.godModel)
 
 router.get('/pieces', login.shouldLogin, con.list);
 

@@ -6,9 +6,11 @@ var userSchema = mongoose.Schema({
 
     id: { type : Number, index: { unique: true } },
     wbId: String,
+    dbId: String,
     name: String,
     avatar: String,
     pieces: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Piece' }],
+    favs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Piece' }],
     work: Boolean,
     updated: { type: Date, default: Date.now },
     created: { type: Date, default: Date.now }

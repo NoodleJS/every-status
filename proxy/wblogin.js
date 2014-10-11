@@ -29,15 +29,7 @@ exports.getCodeCer = function(code, type) {
     var _r ;
     type = type || 'wb';
 
-    if (type=='db') {
-        _r =  querystring.stringify({
-            "client_id": db.appkey,
-            "client_secret": db.appsecret,
-            "grant_type": 'authorization_code',
-            "redirect_uri": db.codeUrl,
-            "code": code
-        });
-    } else {
+    if (type == 'wb') {
         _r =  querystring.stringify({
             "client_id": wb.appkey,
             "client_secret": wb.appsecret,
@@ -45,46 +37,81 @@ exports.getCodeCer = function(code, type) {
             "redirect_uri": wb.codeUrl,
             "code": code
         });
+    } else {
+        _r =  {
+            "client_id": db.appkey,
+            "client_secret": db.appsecret,
+            "grant_type": 'authorization_code',
+            "redirect_uri": db.codeUrl,
+            "code": code
+        };
     }
     
     return _r;
 }
 
 exports.getToken = function (code, type) {
+    
     var url;
     var post_data = this.getCodeCer(code, type);
 
     type = type || 'wb'
     
     if (type == 'db') {
-        url = db.tokenUrl+'?'+post_data;    
+        url = db.tokenUrl;    
     } else {
         url = wb.tokenUrl+'?'+post_data;    
     }
-    
 
     var deferred = Q.defer();
+    if ( type == 'wb') {
+        request.post({url:url}, function(e, r, body) {
+            if (e) {
+                deferred.reject(new Error(e))   
+            } else {
+                deferred.resolve(JSON.parse(body))    
+            }
+        })
+        return deferred.promise;               
+    } else {
+        console.log(post_data)
+        request.post({url: url, form: post_data}, function(e, r, body) {
+            if (e) {
+                deferred.reject(new Error(e))   
+            } else {
+                deferred.resolve(JSON.parse(body))    
+            }
+        })
+        return deferred.promise;               
+    }
     
-    request.post({url:url}, function(e, r, body) {
-        if (e) {
-            deferred.reject(new Error(e))   
-        } else {
-            deferred.resolve(JSON.parse(body))    
-        }
-    })
-    return deferred.promise;       
 }
 
-exports.getInfo = function (token, type) {
-    type = type || 'wb';
 
-    var access_token = token.access_token;
-    var uid = token.uid;
-    var url;
+exports.getDbInfo = function(msg) {
+    var token = msg.access_token;
+    var url = db.infoUrl;
 
     var deferred = Q.defer();
+    var headers = {
+        Authorization: 'Bearer ' + token
+    }
+    request.get({url: url, headers: headers}, function(e, r, body) {
+        if (e) {
+            deferred.reject(new Error(e))
+        } else {
+            deferred.resolve(JSON.parse(body))
+        }
+    })
+    return deferred.promise;
+}
+exports.getInfo = function (token) {
+    
+    var access_token = token.access_token;
+    var uid = token.uid;
+    var url = wb.infoUrl;
 
-    url = type=='db' ? db.infoUrl : wb.infoUrl;
+    var deferred = Q.defer();
 
     var par = querystring.stringify({
         access_token: access_token,

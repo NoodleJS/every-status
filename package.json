@@ -16,8 +16,8 @@
     "mongoose": "*",
     "morgan": "~1.0.0",
     "q": "^1.0.1",
-    "static-favicon": "~1.0.0",
-    "request": "2.40.0"
+    "request": "2.40.0",
+    "static-favicon": "~1.0.0"
   },
   "devDependencies": {
     "gulp-stylus": "*",

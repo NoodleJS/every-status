@@ -6,8 +6,17 @@ html
     if name
       link(rel='stylesheet', href='/css/#{name}.css')
     link(rel='shortcut icon', href='/favicon.ico')
+    script(src='../spm_modules/seajs/2.3.0/dist/sea.js')
+    script(src='../spm_modules/seajs-wrap/1.0.1/dist/seajs-wrap.js')
+    script.
+        seajs.config({
+            base: "/spm_modules/",
+            alias: {
+                "jquery": "jquery/2.1.1/jquery.js"
+            }    
+        })
+        seajs.use('/js/index.js')
   meta(name='viewport', content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0')
-  | <meta property="wb:webmaster" content="0ef8bb0ecec85d2f" />
   body
     #hd
       .tt
@@ -30,10 +39,10 @@ html
               a(href='/users/logout') 退出
           else
             li.menu-item
-              a.login_douban(href='#')
+              a.login_douban(href='/users/login/db')
                 img(src='http://img3.douban.com/pics/douban-icons/favicon_24x24.png', title='豆瓣登录')
             li.menu-item
-              a.login_weibo(href='/users/login')
+              a.login_weibo(href='/users/login/wb')
                 img(src='http://www.sinaimg.cn/blog/developer/wiki/LOGO_24x24.png', title='微博登录')
     #bd
       block content
