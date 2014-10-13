@@ -1,4 +1,13 @@
 var $ = require('jquery');
-var t = require('./add.js');
+var Piece = require("./mod/piece");
 
-t.test();
+var piece = new Piece({
+    interval:30000,
+    container:$(".pieces")
+}).start();
+
+$(document).on("keyup",function(e){
+    if(e.keyCode==32){
+        piece.next();
+    }
+});
