@@ -10,7 +10,7 @@ router.get('/showSession', function(req, res) {
     
     res.render('console', {
         message: 'Session',
-        content: JSON.stringify(req.session)
+        content: JSON.stringify(req.session, null, 2)
     })
 })
 
@@ -22,10 +22,9 @@ router.get('/showPieces', function(req, res) {
 
     Piece.find({author: req.session.user._id},function(err, pieces) { 
         if (err) throw err
-        
         res.render('console', {
             message: 'Pieces',
-            content: JSON.stringify(pieces)
+            content: JSON.stringify(pieces, null, 2)
         })    
     })
     
