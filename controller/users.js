@@ -201,7 +201,10 @@ exports.fav = function(req, res) {
             user.favs.addToSet(it.id);
             it.fans.addToSet(user._id);
             it.save()
-            res.send(it);
+            res.send({
+                'msg': 'no match',
+                'obj': it
+             });
             syncUser(user);
         } else {
             res.send({'msg': 'no match'});
