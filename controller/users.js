@@ -198,8 +198,8 @@ exports.fav = function(req, res) {
 
         if (it) {
             //自增id带来的头痛问题
-            user.favs.push(it.id);
-            it.fans.push(user._id);
+            user.favs.addToSet(it.id);
+            it.fans.addToSet(user._id);
             it.save()
             res.send(it);
             syncUser(user);

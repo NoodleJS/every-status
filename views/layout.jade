@@ -8,14 +8,15 @@ html
     link(rel='shortcut icon', href='/favicon.ico')
     script(src='../spm_modules/seajs/2.3.0/dist/sea.js')
     script(src='../spm_modules/seajs-wrap/1.0.1/dist/seajs-wrap.js')
-    script.
-        seajs.config({
-            base: "/spm_modules/",
-            alias: {
-                "jquery": "jquery/2.1.1/jquery.js"
-            }    
-        })
-        seajs.use('/js/index.js')
+    if name
+      script.
+          seajs.config({
+              base: "/spm_modules/",
+              alias: {
+                  "jquery": "jquery/2.1.1/jquery.js"
+              }    
+          })
+          seajs.use('/js/#{name}.js')
   meta(name='viewport', content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0')
   body
     #hd
