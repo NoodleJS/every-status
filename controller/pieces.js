@@ -16,8 +16,6 @@ exports.create = function(req, res) {
     res.redirect('/piece/' + it.id);
     syncUser(user);
   });
-
-  
 }
 
 function syncUser(user){

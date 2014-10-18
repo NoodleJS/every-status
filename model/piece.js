@@ -9,7 +9,7 @@ var pieceSchema = mongoose.Schema({
     link: String,
     pics:[String] ,
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    faved: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    fans: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     work: Boolean,
     updated: { type: Date, default: Date.now },
     created: { type: Date, default: Date.now }

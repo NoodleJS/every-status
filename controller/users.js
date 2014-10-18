@@ -197,7 +197,10 @@ exports.fav = function(req, res) {
         if (err) throw new Error('Error when find the pieces');
 
         if (it) {
+            //自增id带来的头痛问题
             user.favs.push(it.id);
+            it.fans.push(user._id);
+            it.save()
             res.send(it);
             syncUser(user);
         } else {
