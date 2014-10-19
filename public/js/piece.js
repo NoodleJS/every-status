@@ -15,6 +15,7 @@ favbtn.on('click',function(){
 		  		str = data.msg;
 		  	if (code = 200) {
 		  		favbtn.removeClass('liked');
+		  		favlist.find('li:first').remove();
 		  	}else{
 
 		  	};
@@ -26,8 +27,7 @@ favbtn.on('click',function(){
 	}else{
 		$.ajax({
 		  url: "/ajax/fav/" + pieceId,
-		  success: function(){
-		  	var data = {
+		  success: function(data){
 		  	var fansList = data.list,
 		  		fansNum = fansList.length;
 		  	favbtn.addClass('liked');
