@@ -36,10 +36,22 @@ exports.fav = function(req, res) {
             user.favs.push(it._id);
             it.fans.addToSet(user._id);
             it.save()
-            res.send({
-                'code': 200,
-                'obj': it
-             });
+
+
+            it.populate('fans', function(err, set) {
+                res.send({
+                    'code': 200,
+                    'list': set.fans.map(function(e) {
+                            return {
+                                "id":e.id,
+                                "name": e.name,
+                                "avatar": e.avatar
+                            }
+                        }) 
+                });
+            })
+
+            
             syncUser(user);
         } else {
             res.send({'msg': 'no match'});
