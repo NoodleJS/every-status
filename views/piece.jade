@@ -1,5 +1,8 @@
 extends layout
 
+- var liked = user.favs.indexOf(piece._id + '');
+- console.log(liked)
+
 block content
     .piece(class= piece.pics ? 'withpic' : '' )
       .piece-inner
@@ -24,7 +27,7 @@ block content
                   i.icon-chevron-right
             .favs
               a.like-wrap
-                i.icon-heart(data-id="#{piece.id}")
+                i.icon-heart(data-id="#{piece.id}" class= liked ? 'liked' : 'liked')
               .people
                 ul(class= liked ? 'liked' : 'liked')
                   if user
