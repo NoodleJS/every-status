@@ -10,7 +10,7 @@ block content
       img(src='#{tuser.avatar}', alt='#{tuser.name}')
     if tuser && tuser.name == current.name
       div.share
-        if tuser.douban_access_token
+        if tuser.dbId
           a.sharebtn.active.todouban(href='javascript:;', data-type='douban', title='已绑定豆瓣')
         else 
           a.sharebtn.todouban(href='javascript:;', data-type='douban', title='绑定豆瓣')
