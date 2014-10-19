@@ -40,7 +40,7 @@ exports.fav = function(req, res) {
                 'code': 200,
                 'obj': it
              });
-            syncUser(user, it._id);
+            syncUser(user);
         } else {
             res.send({'msg': 'no match'});
         }
@@ -60,10 +60,20 @@ exports.nofav = function(req, res) {
         if (err) throw new Error('Error when find the pieces');
 
         if (it) {
-            // user.favs.push(it._id);
-            var index = user.favs.indexOf(pieceId);
-            index > -1 && user.favs.splice(index);
-            res.send(it);
+            
+            var index = user.favs.indexOf(it._id + '');
+            if (index == -1) {
+                res.send({
+                    'code': 200,
+                    'msg': 'not fav'
+                })
+                return 
+            }
+            user.favs.splice(index);
+            res.send({
+                'code': 200,
+                'msg': 'success'
+            });
             syncUser(user);
         } else {
             res.send({'msg': 'no match'});
