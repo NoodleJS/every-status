@@ -1,6 +1,7 @@
 
 var Piece = require('../model/piece');
 var User = require('../model/user');
+var marked = require('marked');
 
 exports.create = function(req, res) {
   var user = req.session.user;
@@ -35,6 +36,12 @@ exports.list = function(req, res) {
       .exec(handlerData);
 
       function handlerData(err, pieces){
+
+        pieces = pieces.map(function(e) {
+                e.content = marked(e.content);
+                return e
+              })
+
         if (err) throw err
         res.render('user', { title: '今天...', 
             name: 'people',
@@ -59,6 +66,7 @@ exports.show = function(req, res) {
     id: id
   }, function(err, piece) {
     //handler the piece
+    piece.content = marked(piece.content);
     res.render('piece', {
       titel: '每思每刻',
       name: 'piece',

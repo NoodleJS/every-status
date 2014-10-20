@@ -30,7 +30,7 @@ block content
           div.del.icon-times
         div.piece-body
           div.content
-            a(href='/piece/#{fav.id}', target='_blank')  #{fav.content}
+            a(href='/piece/#{fav.id}', target='_blank')  !{fav.content}
           div.by
             if fav.author_name
               #{fav.author_name}

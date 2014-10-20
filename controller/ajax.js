@@ -1,5 +1,6 @@
 var Piece = require('../model/piece');
 var User = require('../model/user');
+var marked = require('marked');
 
 exports.index = function(req, res) {
     Piece.find({})
@@ -9,6 +10,10 @@ exports.index = function(req, res) {
     function handlerData(err, set) {
         if (err) console.log(err)
         if (set) {
+            set = set.map(function(e) {
+                e.content = marked(e.content);
+                return e
+            })
             res.send(set)
         }
     }
