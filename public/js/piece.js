@@ -4,8 +4,8 @@ var favbtn = $('i.icon-heart'),
 	pieceId = favbtn.attr('data-id'),
 	Num = $('.count'),
 	favbox = $('div.people'),
-	favlist = favbox.find('.liked');
-
+	favlist = favbox.find('ul');
+console.log(favlist);
 favbtn.on('click',function(){
 	if (favbtn.hasClass('liked')) {
 		$.ajax({
