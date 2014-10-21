@@ -1,4 +1,4 @@
-
+extends layout
 
 - var liked = user.favs.indexOf(piece._id + '');
 
@@ -26,9 +26,9 @@ block content
                   i.icon-chevron-right
             .favs
               a.like-wrap
-                i.icon-heart(data-id="#{piece.id}", class= liked ? 'liked' : ' ')
+                i.icon-heart(data-id="#{piece.id}", class= liked ? 'liked' : 'liked')
               .people
-                ul(class= liked ? 'liked' : ' ')
+                ul(class= liked ? 'liked' : '')
                   if user
                     li
                       a(href="/users/#{user.id}")

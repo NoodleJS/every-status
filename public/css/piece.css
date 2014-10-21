@@ -80,7 +80,7 @@
 }
 .piece .favs .people ul {
   float: left;
-  margin-left: -29px;
+  margin-left: 6px;
   transition: margin 0.25s linear;
 }
 .piece .favs .people ul.liked {
