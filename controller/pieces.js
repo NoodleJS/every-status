@@ -1,13 +1,15 @@
-
+var marked = require('marked');
 var Piece = require('../model/piece');
 var User = require('../model/user');
-var marked = require('marked');
+var share = require('../proxy/wbshare');
 
 exports.create = function(req, res) {
   var user = req.session.user;
-  
+  var content = req.body.content;
+  var needShare = req.body.wbShare;
+
   new Piece({
-    content: req.body.content,
+    content: content,
     link: req.body.link,
     work: true, 
     author: user._id
@@ -17,6 +19,10 @@ exports.create = function(req, res) {
     res.redirect('/piece/' + it.id);
     syncUser(user);
   });
+
+  if (needShare) {
+    share.share(user, content);
+  }
 }
 
 function syncUser(user){
