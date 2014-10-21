@@ -9,6 +9,7 @@ var userSchema = mongoose.Schema({
     dbId: String,
     name: String,
     avatar: String,
+    token: String,
     pieces: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Piece' }],
     favs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Piece' }],
     work: Boolean,

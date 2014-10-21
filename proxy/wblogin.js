@@ -124,6 +124,7 @@ exports.getInfo = function (token) {
         if (e) {
             deferred.reject(new Error(e))
         } else {
+            body.token = access_token;
             deferred.resolve(JSON.parse(body))
         }
     })

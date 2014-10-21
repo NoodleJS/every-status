@@ -35,6 +35,7 @@ exports.show = function(req, res) {
     })
 }
 
+//登录 更新token
 exports.login = function(req, res) {
     
     var type = req.params.type || 'wb'
@@ -55,7 +56,6 @@ exports.login = function(req, res) {
             } else if (type == 'wb') {
                 wb.getToken(code, type)
                     .then(function(msg){
-                        
                         handlerToken(msg, req, res)   
                     })      
             }
@@ -107,12 +107,13 @@ exports.login = function(req, res) {
     function handlerToken(msg, req, res) {
         
         var uid = msg.uid;
-        var token = msg.token;
+        var token = msg.access_token;
         //resgin or login 
         User.findOne({wbId: uid}, function(err, user) {
             if (err) throw new Error('Error In DB');
             if (user) {
                 //login
+                user.token = token;
                 doLogin(user, req, res);
             } else {
                 //regsin
@@ -148,7 +149,8 @@ exports.login = function(req, res) {
         new User({
             name: msg.name,
             wbId: msg.id,
-            avatar: msg.profile_image_url
+            avatar: msg.profile_image_url,
+            token: msg.token
         }).save(function(err, user) {
             if (err) throw new Error('Error In addUser'); 
             
