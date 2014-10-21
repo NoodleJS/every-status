@@ -4,8 +4,10 @@ var favbtn = $('i.icon-heart'),
 	pieceId = favbtn.attr('data-id'),
 	Num = $('.count'),
 	favbox = $('div.people'),
-	favlist = favbox.find('ul');
-console.log(favlist);
+	favlist = favbox.find('ul'),
+	box = favlist.closest('.piece-inner'),
+	userId = box.attr('data-userid');
+
 favbtn.on('click',function(){
 	if (favbtn.hasClass('liked')) {
 		$.ajax({
@@ -15,7 +17,8 @@ favbtn.on('click',function(){
 		  		str = data.msg;
 		  	if (code = 200) {
 		  		favbtn.removeClass('liked');
-		  		favlist.find('li:first').remove();
+		  		console.log(favlist.find('a[href="/users/' + userId + '"]'));
+		  		favlist.find('a[href="/users/' + userId + '"]').closest('li').remove();
 		  	}else{
 
 		  	};

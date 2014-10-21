@@ -3,8 +3,8 @@ extends layout
 - var liked = user.favs.indexOf(piece._id + '');
 
 block content
-    .piece(class= piece.pics ? 'withpic' : '' )
-      .piece-inner
+    .piece(class= piece.pics ? 'withpic' : '')
+      .piece-inner(data-userId= user.id) 
         .piece-main
           .card
             .content !{piece.content}
