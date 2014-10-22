@@ -2,6 +2,7 @@ var marked = require('marked');
 var Piece = require('../model/piece');
 var User = require('../model/user');
 var share = require('../proxy/wbshare');
+var gruoper = require('../proxy/gruoper');
 
 exports.create = function(req, res) {
   var user = req.session.user;
@@ -64,6 +65,8 @@ exports.show = function(req, res) {
 
   var id = req.params.id;
 
+  console.log(id);
+
   if (isNaN(id)) {
     throw new Error('请输入正确的id值')
   }
@@ -82,6 +85,33 @@ exports.show = function(req, res) {
       liked: false,
       fav_count: 1
     })
+  })
+}
+
+exports.showGroup = function(req, res) {
+
+  var year = req.params.year;
+
+  console.log(year);
+
+  if (isNaN(year)) {
+    throw new Error('请输入正确的id值')
+  }
+
+  gruoper.groupByYear({
+    year: year
+  }, function(err, piece) {
+    //handler the piece
+    piece.content = marked(piece.content);
+    res.render('user', { title: '今天...', 
+        name: 'people',
+        user: req.session.user,
+        tuser: req.session.user,
+        current: req.session.user, 
+        pages: 1,
+        index: 1,
+        favs: pieces
+    }) 
   })
 }
 
