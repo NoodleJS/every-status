@@ -19,7 +19,8 @@
     "request": "2.40.0",
     "static-favicon": "~1.0.0",
     "serve-favicon": "^2.1.5",
-    "marked": "^0.3.2"
+    "marked": "^0.3.2",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "gulp-stylus": "*",
