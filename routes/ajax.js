@@ -9,4 +9,6 @@ router.get('/fav/:id', con.fav);
 
 router.get('/nofav/:id', con.nofav);
 
+router.get('/delete/:id', con.delPiece);
+
 module.exports = router;

@@ -98,6 +98,33 @@ exports.nofav = function(req, res) {
     })
 }
 
+exports.delPiece = function(req,res){
+    var pieceId = req.params.id,
+        user = req.session.user || {};
+
+    if (Object.keys(user).length == 0) {
+        res.redirect('/');
+        return
+    }
+
+    if(Piece){
+        Piece.remove({id: pieceId},function(err,it){
+             if (err) throw new Error('Error' + it);
+             res.send({
+                  'code': 200,
+                  'msg': 'deleted'
+              })
+        }); 
+    }else{
+      res.send({
+          'code': 500,
+          'msg': 'no this piece'
+      })
+      return
+    }
+    
+}
+
 function syncUser(user){
   User.update({name: user.name}, {favs: user.favs}, function(err) {
     console.log(err)

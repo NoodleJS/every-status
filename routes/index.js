@@ -26,6 +26,4 @@ router.get('/pieces', login.shouldLogin, con.list);
 
 router.get('/piece/:id', login.shouldLogin, con.show);
 
-router.get('/gruoper/:year', login.shouldLogin, con.showGroup);
-
 module.exports = router;
