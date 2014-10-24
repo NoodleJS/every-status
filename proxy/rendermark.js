@@ -4,7 +4,8 @@ var mock = {
   "2014": {
     "01": {
       "01": "YeYeYe!",
-      "02": "YeYeYe!"
+      "02": "YeYeYe!",
+      "03": "YeYeYe!"
     },
     "03": {
       "04": "Okk"
@@ -53,8 +54,14 @@ var template = heredoc(function(){/*
 
 ##  日历
 <%Object.keys(data['2014']).forEach(function(e) {%>
-
 * -[ ] [<%=monthName[e]%>](#<%=monthLink[e]%>) 
+<%})%>
+<%Object.keys(data['2014']).forEach(function(e) {%>
+<a  name="<%=monthLink[e]%>"></a>
+###  <%=monthName[e]%>
+<%Object.keys(data['2014'][e]).forEach(function(d) { %>
+.<%=d%> <%=data['2014'][e][d]%>
+<%})%>
 <%})%>
 */})
 
