@@ -1,17 +1,5 @@
 var _ = require('lodash');
-
-var mock = {
-  "2014": {
-    "01": {
-      "01": "YeYeYe!",
-      "02": "YeYeYe!",
-      "03": "YeYeYe!"
-    },
-    "03": {
-      "04": "Okk"
-    }
-  }
-}
+var group = require('./grouper');
 
 var monthName = {
   '01': '一月',
@@ -65,10 +53,10 @@ var template = heredoc(function(){/*
 <%})%>
 */})
 
-exports.mark = function(path, data) {
-  var compiled = _.template(template, {data: mock, monthName: monthName, monthLink: monthLink});
+exports.mark = function(data) {
+  var compiled = _.template(template, {data: data, monthName: monthName, monthLink: monthLink});
   
   console.log(compiled)
 }
 
-exports.mark()
+group.groupByDay(exports.mark)
