@@ -32,29 +32,7 @@ function syncUser(user){
   })
 }
 
-exports.update = function(req, res) {
-  var user = req.session.user;
-  var pieceId = req.body.pieceId;
-  var content = req.body.content;
 
-  Piece.find({author: user._id, id: pieceId})
-      .exec()
-      .then(updatePiece)
-      .then(handlerRes)
-      .end()
-
-  function Piece(it) {
-    it.updated = new Date();
-    it.content = content;
-    it.save();
-  }
-
-  function handlerRes(data) {
-    res.send({
-      code: 200
-    })
-  }
-}
 
 exports.list = function(req, res) {
 

@@ -11,4 +11,6 @@ router.get('/nofav/:id', con.nofav);
 
 router.get('/delete/:id', con.delPiece);
 
+router.post('/update', con.update);
+
 module.exports = router;
