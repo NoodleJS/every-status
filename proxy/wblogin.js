@@ -4,12 +4,13 @@ var request = require('request');
 var Q = require('q');
 
 var env = global.env || 'development'; 
-var wb,db = {};
+var wb,db,gt = {};
 
 if (env == 'development'){
 
     wb = require('../settings.example.json').wb
     db = require('../settings.example.json').db
+    gt = require('../settings.example.json').db
 
 } else if (env == 'production') {
 
