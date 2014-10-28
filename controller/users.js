@@ -46,8 +46,8 @@ exports.login = function(req, res) {
     } else {
         var code = req.query.code;
         //do redir 
-        
         if (code) {
+            console.log(code);
             if (type == 'db') {
                 wb.getToken(code, type)
                 .then(function(msg) {
@@ -58,6 +58,11 @@ exports.login = function(req, res) {
                     .then(function(msg){
                         handlerToken(msg, req, res)   
                     })      
+            }else if(type == 'gt'){
+                wb.getToken(code, type)
+                    .then(function(msg){
+                        handlerToken(msg, req, res)   
+                    })
             }
             
         } else {
@@ -69,8 +74,7 @@ exports.login = function(req, res) {
                     response_type: 'code'
                 })
                 res.redirect('https://api.weibo.com/oauth2/authorize?'+query);    
-            } else {
-                
+            } else if (type=='db'){
                 var setting = config.db;
                 var query = querystring.stringify({
                     client_id: setting.appkey,
@@ -78,6 +82,15 @@ exports.login = function(req, res) {
                     response_type: 'code', 
                 })
                 res.redirect('https://www.douban.com/service/auth2/auth?'+query);
+            } else {
+                var setting = config.gt;
+                var query = querystring.stringify({
+                    client_id: setting.appkey,
+                    redirect_uri: setting.codeUrl,
+                    scope: 'user,public_repo',
+                })
+                console.log(query);
+                res.redirect('https://github.com/login/oauth/authorize?'+query);
             }
             
         }

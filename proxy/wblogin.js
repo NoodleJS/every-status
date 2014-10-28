@@ -10,12 +10,13 @@ if (env == 'development'){
 
     wb = require('../settings.example.json').wb
     db = require('../settings.example.json').db
-    gt = require('../settings.example.json').db
+    gt = require('../settings.example.json').gt
 
 } else if (env == 'production') {
 
     wb = require('../settings.json').wb
     db = require('../settings.json').db
+    gt = require('../settings.json').gt
 
 } else {
 
@@ -38,12 +39,20 @@ exports.getCodeCer = function(code, type) {
             "redirect_uri": wb.codeUrl,
             "code": code
         });
-    } else {
+    } else if(type == 'db'){
         _r =  {
             "client_id": db.appkey,
             "client_secret": db.appsecret,
             "grant_type": 'authorization_code',
             "redirect_uri": db.codeUrl,
+            "code": code
+        };
+    }else if(type == 'gt'){
+        _r =  {
+            "client_id": gt.appkey,
+            "client_secret": gt.appsecret,
+            "grant_type": 'authorization_code',
+            "redirect_uri": gt.codeUrl,
             "code": code
         };
     }
@@ -60,8 +69,10 @@ exports.getToken = function (code, type) {
     
     if (type == 'db') {
         url = db.tokenUrl;    
-    } else {
+    } else if (type == 'wb'){
         url = wb.tokenUrl+'?'+post_data;    
+    }else{
+        url = gt.tokenUrl+'?'+post_data;    
     }
 
     var deferred = Q.defer();
@@ -74,7 +85,7 @@ exports.getToken = function (code, type) {
             }
         })
         return deferred.promise;               
-    } else {
+    } else if(type == 'db'){
         console.log(post_data)
         request.post({url: url, form: post_data}, function(e, r, body) {
             if (e) {
@@ -84,6 +95,15 @@ exports.getToken = function (code, type) {
             }
         })
         return deferred.promise;               
+    }else if(type == 'gt'){
+        request.post({url:url}, function(e, r, body) {
+            if (e) {
+                deferred.reject(new Error(e))   
+            } else {
+                deferred.resolve(JSON.parse(body))    
+            }
+        })
+        return deferred.promise;                
     }
     
 }
