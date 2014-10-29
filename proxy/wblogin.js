@@ -9,14 +9,10 @@ var wb,db,gt = {};
 if (env == 'development'){
 
     wb = require('../settings.example.json').wb
-    db = require('../settings.example.json').db
-    gt = require('../settings.example.json').gt
 
 } else if (env == 'production') {
 
     wb = require('../settings.json').wb
-    db = require('../settings.json').db
-    gt = require('../settings.json').gt
 
 } else {
 
