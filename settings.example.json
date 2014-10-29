@@ -24,7 +24,7 @@
     "appsecret": "281c0d3e62cb71a57082000176397c7de1a7f66f",
     "codeUrl":"http://www.baidu.com",
     "tokenUrl":"https://github.com/login/oauth/access_token",
-    "infoUrl":"https://api.github.com/user?access_token="
+    "infoUrl":"https://api.github.com/user"
   }
 }
 
