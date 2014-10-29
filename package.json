@@ -20,7 +20,8 @@
     "q": "^1.0.1",
     "request": "2.40.0",
     "serve-favicon": "^2.1.5",
-    "static-favicon": "~1.0.0"
+    "static-favicon": "~1.0.0",
+    "eventproxy": "^0.3.1"
   },
   "devDependencies": {
     "gulp-stylus": "*",
