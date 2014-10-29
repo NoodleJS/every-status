@@ -18,6 +18,13 @@
     "codeUrl":"http://www.baidu.com",
     "tokenUrl":"https://www.douban.com/service/auth2/token",
     "infoUrl":"https://api.douban.com/v2/user/~me"
+  },
+  "gt": {
+    "appkey": "7a715634f6e72ea6d720",
+    "appsecret": "281c0d3e62cb71a57082000176397c7de1a7f66f",
+    "codeUrl":"http://www.baidu.com",
+    "tokenUrl":"https://github.com/login/oauth/access_token",
+    "infoUrl":"https://api.github.com/user?access_token="
   }
 }
 
