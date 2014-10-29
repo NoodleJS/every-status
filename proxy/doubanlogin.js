@@ -31,6 +31,7 @@ exports.getCodeCer = function(code) {
             "redirect_uri": db.codeUrl,
             "code": code
         });
+    console.log(_r);
     return _r;
 }
 
@@ -38,11 +39,11 @@ exports.getToken = function (code) {
 
     var post_data = this.getCodeCer(code);
 
-    var url = db.tokenUrl + '?' +post_data;
+    var url = db.tokenUrl;
 
     var deferred = Q.defer();
 
-    request.post({url:url}, function(e, r, body) {
+    request.post({url: url, form: post_data}, function(e, r, body) {
         if (e) {
             deferred.reject(new Error(e))   
         } else {
@@ -52,7 +53,7 @@ exports.getToken = function (code) {
     return deferred.promise;       
 }
 
-exports.getInfo = function (token) {
+exports.getInfo = function (msg) {
     var token = msg.access_token;
     var url = db.infoUrl;
 

@@ -111,34 +111,25 @@ exports.login = function(req, res) {
     }
 
     function dbsignUp(msg, req, res) {
-        wb.getDbInfo(msg)
+        db.getInfo(msg)
             .then(function(msg) {
                 addDbUser(msg, req, res)
             });
     }
 
-    function handlerGt(msg, req, res) {
-        var token = msg['access_token'];
-        User.findOne({gtToken: token}).exec(function(err, user) {
-            if (err) throw new Error('Error when find dbuser');
-            if (user) {
-                doLogin(user, req, res);
-            } else {
-                gtsignUp(msg, req, res);
-            }
+    function addDbUser(msg) {
+        new User({
+            name: msg.name,
+            dbId: msg.id,
+            avatar: msg.avatar
+        }).save(function(err, user) {
+            if (err) throw new Error('Error In addDbUser'); 
+            doLogin(user, req, res)
+            
         })
-    }
+    }  
 
-    function gtsignUp(msg, req, res) {
-        wb.getDbInfo(msg)
-            .then(function(msg) {
-                addGtUser(msg, req, res)
-            });
-    }
-
-
-    function handlerToken(msg, req, res) {
-        
+    function handlerWb(msg, req, res) {
         var uid = msg.uid;
         var token = msg.access_token;
         //resgin or login 
@@ -150,35 +141,20 @@ exports.login = function(req, res) {
                 doLogin(user, req, res);
             } else {
                 //regsin
-                signUp(msg, req, res);
+                wbsignUp(msg, req, res);
             }
         })
     }
 
-    function doLogin(user, req, res) {
-        
-        if ('session' in req) {
-            (req.session.user = user);    
-        }
-        var token = coder.encodeToken(user._id);
-
-        res.cookie('token', token,  { maxAge: 3600 * 24 * 7, httpOnly: false });
-        res.redirect('/');
-        
-        return
-    }
-
-    function signUp(msg, req, res) {
-        
+    function wbsignUp(msg, req, res) {
         wb.getInfo(msg)
             .then(function(msg) {
-                addUser(msg, req, res)
+                addWbUser(msg, req, res)
             })
     }
 
     //add user by msg from api
-    function addUser(msg, req, res) {
-        
+    function addWbUser(msg, req, res) {
         new User({
             name: msg.name,
             wbId: msg.id,
@@ -192,17 +168,51 @@ exports.login = function(req, res) {
         })
     }  
 
-    function addDbUser(msg) {
-        new User({
-            name: msg.name,
-            dbId: msg.id,
-            avatar: msg.avatar
-        }).save(function(err, user) {
-            if (err) throw new Error('Error In addDbUser'); 
-            doLogin(user, req, res)
-            
+    function handlerGt(msg, req, res) {
+        var token = msg.access_token;
+        User.findOne({gtToken: token}).exec(function(err, user) {
+            if (err) throw new Error('Error when find dbuser');
+            if (user) {
+                doLogin(user, req, res);
+            } else {
+                gtsignUp(msg, req, res);
+            }
         })
-    }   
+    }
+
+    function gtsignUp(msg, req, res) {
+        console.log(msg);
+        gt.getInfo(msg)
+            .then(function(msg) {
+                addGtUser(msg, req, res)
+            });
+    }
+
+    function addGtUser(msg, req, res) {
+        // new User({
+        //     name: msg.name,
+        //     gtid: msg.id,
+        //     avatar: msg.profile_image_url,
+        //     gttoken: msg.token
+        // }).save(function(err, user) {
+        //     if (err) throw new Error('Error In addUser'); 
+        //     doLogin(user, req, res) 
+        // })
+    }  
+
+    function doLogin(user, req, res) {
+        
+        if ('session' in req) {
+            (req.session.user = user);    
+        }
+        var token = coder.encodeToken(user._id);
+
+        res.cookie('token', token,  { maxAge: 3600 * 24 * 7, httpOnly: false });
+        res.redirect('/');
+        
+        return
+    }
+ 
 }
 
 exports.logout = function(req, res) {

@@ -23,7 +23,6 @@ exports.getCodeCer = function(code) {
     var _r =  querystring.stringify({
             "client_id": gt.appkey,
             "client_secret": gt.appsecret,
-            "grant_type": 'authorization_code',
             "redirect_uri": gt.codeUrl,
             "code": code
         });
@@ -34,12 +33,12 @@ exports.getToken = function (code) {
 
     var post_data = this.getCodeCer(code);
 
-    var url = gt.tokenUrl + post_data;
+    var url = gt.tokenUrl + '?' + post_data;
 
     var deferred = Q.defer();
 
     request.post({url:url}, function(e, r, body) {
-        console.log(body);
+        console.log('token=' + body);
         if (e) {
             deferred.reject(new Error(e))   
         } else {
@@ -60,10 +59,10 @@ exports.getInfo = function (token) {
         access_token: access_token
     })
 
-    url += '?'+par;
+    url += '?' + par;
     
     request.get({url: url}, function(e, r, body) {
-        console.log(body);
+        console.log('info' +body);
         if (e) {
             deferred.reject(new Error(e))
         } else {
