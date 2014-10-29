@@ -2,6 +2,7 @@ var querystring = require('querystring');
 var User = require('../model/user');
 var Piece = require('../model/piece');
 var wb = require('../proxy/wblogin');
+var db = require('../proxy/doubanlogin');
 var gt = require('../proxy/githublogin');
 var coder = require('../proxy/authorize');
 var config = require('../proxy/getconfig');
@@ -48,19 +49,18 @@ exports.login = function(req, res) {
         var code = req.query.code;
         //do redir 
         if (code) {
-            console.log(code);
             if (type == 'db') {
-                wb.getToken(code, type)
+                db.getToken(code)
                 .then(function(msg) {
                     handlerDb(msg, req, res)
                 })
             } else if (type == 'wb') {
-                wb.getToken(code, type)
+                wb.getToken(code)
                     .then(function(msg){
-                        handlerToken(msg, req, res)   
+                        handlerWb(msg, req, res)   
                     })      
             }else if(type == 'gt'){
-                gt.getToken(code, type)
+                gt.getToken(code)
                     .then(function(msg){
                         handlerGt(msg, req, res)   
                     })
