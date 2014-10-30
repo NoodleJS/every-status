@@ -2,6 +2,7 @@ var querystring = require('querystring');
 var User = require('../model/user');
 var Piece = require('../model/piece');
 var wb = require('../proxy/wblogin');
+var gt = require('../proxy/githublogin');
 var coder = require('../proxy/authorize');
 var config = require('../proxy/getconfig');
 var Q = require('q');
@@ -59,9 +60,9 @@ exports.login = function(req, res) {
                         handlerToken(msg, req, res)   
                     })      
             }else if(type == 'gt'){
-                wb.getToken(code, type)
+                gt.getToken(code, type)
                     .then(function(msg){
-                        handlerToken(msg, req, res)   
+                        handlerGt(msg, req, res)   
                     })
             }
             
@@ -113,6 +114,25 @@ exports.login = function(req, res) {
         wb.getDbInfo(msg)
             .then(function(msg) {
                 addDbUser(msg, req, res)
+            });
+    }
+
+    function handlerGt(msg, req, res) {
+        var token = msg['access_token'];
+        User.findOne({gtToken: token}).exec(function(err, user) {
+            if (err) throw new Error('Error when find dbuser');
+            if (user) {
+                doLogin(user, req, res);
+            } else {
+                gtsignUp(msg, req, res);
+            }
+        })
+    }
+
+    function gtsignUp(msg, req, res) {
+        wb.getDbInfo(msg)
+            .then(function(msg) {
+                addGtUser(msg, req, res)
             });
     }
 
