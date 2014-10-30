@@ -1,5 +1,8 @@
 var $ = require('jquery');
 var Piece = require("./mod/piece");
+var gaProxy = require('./mod/ga');
+
+gaProxy.send();
 
 var piece = new Piece({
     interval:30000,
@@ -11,3 +14,5 @@ $(document).on("keyup",function(e){
         piece.next();
     }
 });
+
+
