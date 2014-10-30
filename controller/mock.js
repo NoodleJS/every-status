@@ -1,6 +1,9 @@
 var Piece = require('../model/piece');
 var User = require('../model/user');
 var coder = require('../proxy/authorize');
+var grouper = require('../proxy/grouper');
+var marker = require('../proxy/rendermark');
+var marked = require('marked');
 
 
 exports.addUser = function(req, res) {
@@ -52,6 +55,14 @@ function doLogin(user, req, res) {
     res.redirect('/');
 
     return
+}
+
+exports.markDown = function(req, res) {
+    grouper.groupByDay( function(data) {
+        var result = marker.mark(data);
+        console.log(result);
+        res.send(marked(result))
+    });
 }
 
 exports.showUser = function(req, res) {

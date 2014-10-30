@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var con = require('../controller/users');
+var mock = require('../controller/mock');
 
 router.get('/', function(req, res) {
     
@@ -29,6 +30,10 @@ router.get('/showPieces', function(req, res) {
     })
     
 })
+
+//router.get('/markdown')
+
+router.get('/markdown', mock.markDown)
 
 router.get('/wb', function(req, res) {
     res.render('wb')

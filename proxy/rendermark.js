@@ -56,7 +56,5 @@ var template = heredoc(function(){/*
 exports.mark = function(data) {
   var compiled = _.template(template, {data: data, monthName: monthName, monthLink: monthLink});
   
-  console.log(compiled)
+  return compiled
 }
-
-group.groupByDay(exports.mark)
