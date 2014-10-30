@@ -42,7 +42,7 @@ exports.getToken = function (code) {
         if (e) {
             deferred.reject(new Error(e))   
         } else {
-            deferred.resolve(JSON.parse(body))    
+            deferred.resolve(body)    
         }
     })
     return deferred.promise;       
@@ -59,15 +59,19 @@ exports.getInfo = function (token) {
         access_token: access_token
     })
 
+    var headers = {
+        'User-Agent': 'Awesome-Octocat-App'
+    };
+
     url += '?' + par;
     
-    request.get({url: url}, function(e, r, body) {
+    request.get({url: url, headers: headers}, function(e, r, body) {
         console.log('info' +body);
         if (e) {
             deferred.reject(new Error(e))
         } else {
             body.token = access_token;
-            deferred.resolve(JSON.parse(body))
+            deferred.resolve(body)
         }
     })
 

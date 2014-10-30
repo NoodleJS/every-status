@@ -181,7 +181,6 @@ exports.login = function(req, res) {
     }
 
     function gtsignUp(msg, req, res) {
-        console.log(msg);
         gt.getInfo(msg)
             .then(function(msg) {
                 addGtUser(msg, req, res)
@@ -189,15 +188,16 @@ exports.login = function(req, res) {
     }
 
     function addGtUser(msg, req, res) {
-        // new User({
-        //     name: msg.name,
-        //     gtid: msg.id,
-        //     avatar: msg.profile_image_url,
-        //     gttoken: msg.token
-        // }).save(function(err, user) {
-        //     if (err) throw new Error('Error In addUser'); 
-        //     doLogin(user, req, res) 
-        // })
+        console.log(msg);
+        new User({
+            name: msg.name,
+            gtid: msg.id,
+            avatar: msg.profile_image_url,
+            gttoken: msg.token
+        }).save(function(err, user) {
+            if (err) throw new Error('Error In addUser'); 
+            doLogin(user, req, res) 
+        })
     }  
 
     function doLogin(user, req, res) {
