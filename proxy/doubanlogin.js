@@ -4,15 +4,15 @@ var request = require('request');
 var Q = require('q');
 
 var env = global.env || 'development'; 
-var wb = {};
+var db = {};
 
 if (env == 'development'){
 
-    wb = require('../settings.example.json').wb
+    db = require('../settings.example.json').db
 
 } else if (env == 'production') {
 
-    wb = require('../settings.json').wb
+    db = require('../settings.json').db
 
 } else {
 
@@ -25,12 +25,13 @@ if (env == 'development'){
 
 exports.getCodeCer = function(code) {
     var _r =  querystring.stringify({
-            "client_id": wb.appkey,
-            "client_secret": wb.appsecret,
+            "client_id": db.appkey,
+            "client_secret": db.appsecret,
             "grant_type": 'authorization_code',
-            "redirect_uri": 'http://www.every-status.com/users/login',
+            "redirect_uri": db.codeUrl,
             "code": code
         });
+    console.log(_r);
     return _r;
 }
 
@@ -38,11 +39,11 @@ exports.getToken = function (code) {
 
     var post_data = this.getCodeCer(code);
 
-    var url = 'https://api.weibo.com/oauth2/access_token?'+post_data
+    var url = db.tokenUrl;
 
     var deferred = Q.defer();
 
-    request.post({url:url}, function(e, r, body) {
+    request.post({url: url, form: post_data}, function(e, r, body) {
         if (e) {
             deferred.reject(new Error(e))   
         } else {
@@ -52,30 +53,21 @@ exports.getToken = function (code) {
     return deferred.promise;       
 }
 
-exports.getInfo = function (token) {
-    console.log(token)
-    var access_token = token.access_token;
-    var uid = token.uid;
+exports.getInfo = function (msg) {
+    var token = msg.access_token;
+    var url = db.infoUrl;
 
     var deferred = Q.defer();
-
-    var url = 'https://api.weibo.com/2/users/show.json';
-
-    var par = querystring.stringify({
-        access_token: access_token,
-        uid: uid
-    })
-
-    url += '?'+par;
-    
-    request.get({url: url}, function(e, r, body) {
+    var headers = {
+        Authorization: 'Bearer ' + token
+    }
+    request.get({url: url, headers: headers}, function(e, r, body) {
         if (e) {
             deferred.reject(new Error(e))
         } else {
             deferred.resolve(JSON.parse(body))
         }
     })
-
     return deferred.promise;
 }
 
