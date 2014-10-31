@@ -90,7 +90,6 @@ exports.login = function(req, res) {
                     redirect_uri: setting.codeUrl,
                     scope: 'user,public_repo',
                 })
-                console.log(query);
                 res.redirect('https://github.com/login/oauth/authorize?'+query);
             }
             
@@ -169,31 +168,33 @@ exports.login = function(req, res) {
     }  
 
     function handlerGt(msg, req, res) {
-        var token = msg.access_token;
+        //parse parm
+        var token = querystring.parse(msg).access_token;
+        
         User.findOne({gtToken: token}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
-            console.log('user='+user);
             if (user) {
                 doLogin(user, req, res);
             } else {
-                gtsignUp(msg, token, req, res);
+                gtsignUp(msg, req, res);
             }
         })
     }
 
-    function gtsignUp(msg, token, req, res) {
+    function gtsignUp(msg, req, res) {
         gt.getInfo(msg)
-            .then(function(msg,token) {
-                addGtUser(msg, token, req, res)
+            .then(function(msg) {
+                addGtUser(msg, req, res)
             });
     }
 
-    function addGtUser(msg, token, req, res) {
+    function addGtUser(msg, req, res) {
+
         new User({
             name: msg.login,
-            gtid: msg.id,
+            gtId: msg.id,
             avatar: msg.avatar_url,
-            gttoken: token
+            gtToken: msg.token
         }).save(function(err, user) {
             if (err) throw new Error('Error In addUser'); 
             doLogin(user, req, res) 
@@ -231,5 +232,3 @@ function syncUser(user){
     if (err) throw new Error('error in user ');
   })
 }
-
-
