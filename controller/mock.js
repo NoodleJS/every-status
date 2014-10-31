@@ -61,7 +61,7 @@ exports.markDown = function(req, res) {
     grouper.groupByDay( function(data) {
         var result = marker.mark(data);
         console.log(result);
-        res.send(marked(result))
+        res.render( 'console', {content: marked(result)})
     });
 }
 
