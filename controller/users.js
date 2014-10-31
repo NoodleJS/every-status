@@ -172,28 +172,28 @@ exports.login = function(req, res) {
         var token = msg.access_token;
         User.findOne({gtToken: token}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
+            console.log('user='+user);
             if (user) {
                 doLogin(user, req, res);
             } else {
-                gtsignUp(msg, req, res);
+                gtsignUp(msg, token, req, res);
             }
         })
     }
 
-    function gtsignUp(msg, req, res) {
+    function gtsignUp(msg, token, req, res) {
         gt.getInfo(msg)
-            .then(function(msg) {
-                addGtUser(msg, req, res)
+            .then(function(msg,token) {
+                addGtUser(msg, token, req, res)
             });
     }
 
-    function addGtUser(msg, req, res) {
-        console.log(msg);
+    function addGtUser(msg, token, req, res) {
         new User({
-            name: msg.name,
+            name: msg.login,
             gtid: msg.id,
-            avatar: msg.profile_image_url,
-            gttoken: msg.token
+            avatar: msg.avatar_url,
+            gttoken: token
         }).save(function(err, user) {
             if (err) throw new Error('Error In addUser'); 
             doLogin(user, req, res) 

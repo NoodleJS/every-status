@@ -49,23 +49,20 @@ exports.getToken = function (code) {
 }
 
 exports.getInfo = function (token) {
-    
+    console.log('getInfo=' + token);
     var access_token = token.access_token;
     var url = gt.infoUrl;
 
     var deferred = Q.defer();
 
     var par = querystring.stringify({
-        access_token: access_token
+        'access_token': access_token
     })
 
-    var headers = {
-        'User-Agent': 'Awesome-Octocat-App'
-    };
 
     url += '?' + par;
     
-    request.get({url: url, headers: headers}, function(e, r, body) {
+    request.get({url: url, 'User-Agent' :'every-status'}, function(e, r, body) {
         console.log('info' +body);
         if (e) {
             deferred.reject(new Error(e))
