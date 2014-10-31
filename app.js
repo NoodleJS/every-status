@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var env = process.env.NODE_ENV || 'development';
 
 var db = require('./proxy/index');
 var routes = require('./routes/index');
@@ -32,8 +33,12 @@ app.use(session({
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/temp', temp);
 app.use('/ajax', ajax);
+
+if (env == 'development') {
+    app.use('/temp', temp);    
+}
+
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

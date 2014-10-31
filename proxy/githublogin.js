@@ -62,8 +62,6 @@ exports.getInfo = function (token) {
 
     url += '?' + par;
     
-    console.log(url);
-
     request.get({url: url, headers: {'User-Agent' :'every-status'}}, function(e, r, body) {
         
         if (e) {
