@@ -36,25 +36,27 @@ exports.getToken = function (code) {
 }
 
 exports.getInfo = function (token) {
-    console.log('getInfo=' + token);
-    var access_token = token.access_token;
+    //parse info
+    var token = querystring.parse(token).access_token;
     var url = gt.infoUrl;
 
     var deferred = Q.defer();
 
     var par = querystring.stringify({
-        'access_token': access_token
+        'access_token': token
     })
 
 
     url += '?' + par;
     
-    request.get({url: url, 'User-Agent' :'every-status'}, function(e, r, body) {
+    request.get({url: url, headers: {'User-Agent' :'every-status'}}, function(e, r, body) {
         
         if (e) {
+            console.log('error', e)
             deferred.reject(new Error(e))
         } else {
-            body.token = access_token;
+            body = JSON.parse(body);
+            body.token = token;
             deferred.resolve(body)
         }
     })
