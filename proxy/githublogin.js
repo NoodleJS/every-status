@@ -4,22 +4,9 @@ var request = require('request');
 var Q = require('q');
 
 var env = global.env || 'development'; 
-var gt = {};
+var gt = require('./getConfig').gt;
 
-if (env == 'development'){
-
-    gt = require('../settings.example.json').gt
-
-} else if (env == 'production') {
-
-    gt = require('../settings.json').gt
-
-} else {
-
-    return 
-}
-
-exports.getCodeCer = function(code) {
+function getCodeCer(code) {
     var _r =  querystring.stringify({
             "client_id": gt.appkey,
             "client_secret": gt.appsecret,
@@ -31,7 +18,7 @@ exports.getCodeCer = function(code) {
 
 exports.getToken = function (code) {
 
-    var post_data = this.getCodeCer(code);
+    var post_data = getCodeCer(code);
 
     var url = gt.tokenUrl + '?' + post_data;
 
@@ -63,7 +50,7 @@ exports.getInfo = function (token) {
     url += '?' + par;
     
     request.get({url: url, 'User-Agent' :'every-status'}, function(e, r, body) {
-        console.log('info' +body);
+        
         if (e) {
             deferred.reject(new Error(e))
         } else {
