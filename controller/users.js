@@ -14,9 +14,7 @@ exports.show = function(req, res) {
     var id = req.params.id;
 
     User.findOne({id: id}, function(err, it) {
-        
         if (err) throw new Error('Error In DB');
-        
         if (it) {
             it.populate('pieces', function(err, set) {
 
@@ -30,7 +28,6 @@ exports.show = function(req, res) {
                   favs: set.pieces
                 })  
             })
-            
         } else {
             res.redirect('/')
         }
@@ -40,67 +37,67 @@ exports.show = function(req, res) {
 //登录 更新token
 exports.login = function(req, res) {
     
-    var type = req.params.type || 'wb'
-    if (global.env == 'development' && false) {
-        console.log(global.God)
-        doLogin(global.God, req, res);
+    var type = req.params.type;
 
-    } else {
-        var code = req.query.code;
-        //do redir 
-        if (code) {
-            if (type == 'db') {
-                db.getToken(code)
-                .then(function(msg) {
-                    handlerDb(msg, req, res)
-                })
-            } else if (type == 'wb') {
-                wb.getToken(code)
-                    .then(function(msg){
-                        handlerWb(msg, req, res)   
-                    })      
-            }else if(type == 'gt'){
-                gt.getToken(code)
-                    .then(function(msg){
-                        handlerGt(msg, req, res)   
-                    })
-            }
-            
-        } else {
-            if (type=='wb') {
-                var setting = config.wb;
-                var query = querystring.stringify({
-                    client_id: setting.appkey,
-                    redirect_uri: setting.codeUrl,
-                    response_type: 'code'
-                })
-                res.redirect('https://api.weibo.com/oauth2/authorize?'+query);    
-            } else if (type=='db'){
-                var setting = config.db;
-                var query = querystring.stringify({
-                    client_id: setting.appkey,
-                    redirect_uri: setting.codeUrl,
-                    response_type: 'code', 
-                })
-                res.redirect('https://www.douban.com/service/auth2/auth?'+query);
-            } else {
-                var setting = config.gt;
-                var query = querystring.stringify({
-                    client_id: setting.appkey,
-                    redirect_uri: setting.codeUrl,
-                    scope: 'user,public_repo',
-                })
-                console.log(query);
-                res.redirect('https://github.com/login/oauth/authorize?'+query);
-            }
-            
-        }
+    if (!type) {
+        res.redirect('/');
     }
 
+    var code = req.query.code;
+    //do redir 
+    if (code) {
+        if (type == 'db') {
+            db.getToken(code)
+            .then(function(msg) {
+                handlerDb(msg, req, res)
+            })
+        } else if (type == 'wb') {
+            wb.getToken(code)
+                .then(function(msg){
+                    handlerWb(msg, req, res)   
+                })      
+        }else if(type == 'gt'){
+            gt.getToken(code)
+                .then(function(msg){
+                    handlerGt(msg, req, res)   
+                })
+        }
+        
+    } else {
+        if (type=='wb') {
+            var setting = config.wb;
+            var query = querystring.stringify({
+                client_id: setting.appkey,
+                redirect_uri: setting.codeUrl,
+                response_type: 'code'
+            })
+            res.redirect('https://api.weibo.com/oauth2/authorize?'+query);    
+        } else if (type=='db'){
+            var setting = config.db;
+            var query = querystring.stringify({
+                client_id: setting.appkey,
+                redirect_uri: setting.codeUrl,
+                response_type: 'code', 
+            })
+            res.redirect('https://www.douban.com/service/auth2/auth?'+query);
+        } else {
+            var setting = config.gt;
+            var query = querystring.stringify({
+                client_id: setting.appkey,
+                redirect_uri: setting.codeUrl,
+                scope: 'user,public_repo',
+            })
+            console.log(query);
+            res.redirect('https://github.com/login/oauth/authorize?'+query);
+        }
+            
+    }
+    
+
     function handlerDb(msg, req, res) {
-        var did = msg['douban_user_id'],
-            token = msg['access_token'];
-        User.findOne({dbId: did}).exec(function(err, user) {
+        var dbId = msg.douban_user_id,
+            token = msg.access_token;
+        User.findOne({dbId: dbId}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
             if (user) {
                 doLogin(user, req, res);
