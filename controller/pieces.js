@@ -77,13 +77,17 @@ exports.show = function(req, res) {
   }, function(err, piece) {
     //handler the piece
     piece.content = marked(piece.content);
+    console.log('piece=' + piece );
+    console.log('user=' + [req.session.user]);
+    var favs = req.session.user.favs;
+    var liked = favs.indexOf(piece._id + '');
     res.render('piece', {
       titel: '每思每刻',
       name: 'piece',
       piece: piece,
       user: req.session.user,
       favs: [req.session.user],
-      liked: false,
+      liked: liked,
       fav_count: 1
     })
   })
