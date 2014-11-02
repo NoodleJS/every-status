@@ -27,15 +27,15 @@ block content
                 i.icon-heart(data-id="#{piece.id}", class= (liked != "-1") ? 'liked' : '')
               .people
                 ul(class= (liked != "-1") ? 'liked' : '')
-                  if user
+                  if (piece._id in user.favs)
                     li
                       a(href="/users/#{user.id}")
                         img(src="#{user.avatar}")
                   for faver in favs
-                    if (user.id!=faver.id)
+                    if (user._id!=faver)
                       li
-                        a(href="/people")
-                          img(src="#{user.avatar}")
+                        a(href="/users/#{faver}")
+                          img(src="#{faver}")
                   if fav_count
                     .fav-count 等
                       span.count #{fav_count}人喜欢

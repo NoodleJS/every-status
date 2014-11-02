@@ -32,8 +32,6 @@ function syncUser(user){
   })
 }
 
-
-
 exports.list = function(req, res) {
 
   //default display
@@ -78,7 +76,8 @@ exports.show = function(req, res) {
     //handler the piece
     piece.content = marked(piece.content);
     console.log('piece=' + piece );
-    console.log('user=' + [req.session.user]);
+    var user = req.session.user;
+    console.log('user=' + [user]);
     var favs = req.session.user.favs;
     var liked = favs.indexOf(piece._id + '');
     res.render('piece', {
@@ -88,10 +87,11 @@ exports.show = function(req, res) {
       user: req.session.user,
       favs: [req.session.user],
       liked: liked,
-      fav_count: 1
+      fav_count: piece.fans.length
     })
   })
 }
+
 
 
 
