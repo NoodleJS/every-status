@@ -27,15 +27,17 @@ block content
                 i.icon-heart(data-id="#{piece.id}", class= (liked != "-1") ? 'liked' : '')
               .people
                 ul(class= (liked != "-1") ? 'liked' : '')
-                  if (piece._id in user.favs)
-                    li
-                      a(href="/users/#{user.id}")
-                        img(src="#{user.avatar}")
-                  for faver in favs
-                    if (user._id!=faver)
+                  for fan in fans
+                    if (user.id == fan.id)
                       li
-                        a(href="/users/#{faver}")
-                          img(src="#{faver}")
+                        a(href="/users/#{user.id}")
+                          img(src="#{user.avatar}")
+                  if fav_count
+                    for fan in fans
+                      if (user.id != fan.id)
+                        li
+                          a(href="/users/#{fan.id}")
+                            img(src="#{fan.avatar}")
                   if fav_count
                     .fav-count 等
                       span.count #{fav_count}人喜欢
