@@ -27,11 +27,9 @@ block content
                 i.icon-heart(data-id="#{piece.id}", class= (liked != "-1") ? 'liked' : '')
               .people
                 ul(class= (liked != "-1") ? 'liked' : '')
-                  for fan in fans
-                    if (user.id == fan.id)
-                      li
-                        a(href="/users/#{user.id}")
-                          img(src="#{user.avatar}")
+                  li
+                    a(href="/users/#{user.id}")
+                      img(src="#{user.avatar}")
                   if fav_count
                     for fan in fans
                       if (user.id != fan.id)

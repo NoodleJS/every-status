@@ -80,7 +80,11 @@
 }
 .piece .favs .people ul {
   float: left;
-  margin-left: 6px;
+  margin-left: -29px;
+  -webkit-transition: margin 0.25s linear;
+  -moz-transition: margin 0.25s linear;
+  -o-transition: margin 0.25s linear;
+  -ms-transition: margin 0.25s linear;
   transition: margin 0.25s linear;
 }
 .piece .favs .people ul.liked {

@@ -74,13 +74,10 @@ exports.show = function(req, res) {
       if (err) throw new Error('Error In DB');
       if (piece) {
           piece.content = marked(piece.content);
-          console.log('piece=' + piece );
           var user = req.session.user;
-          console.log('user=' + [user]);
           var favs = req.session.user.favs;
           var liked = favs.indexOf(piece._id + '');
           piece.populate('fans', function(err, set) {
-              console.log('set==' +set);
               res.render('piece', {
                 titel: '每思每刻',
                 name: 'piece',
