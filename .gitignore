@@ -16,3 +16,4 @@ static/node_modules
 static/extension
 static/extension.pem
 settings.json
+html

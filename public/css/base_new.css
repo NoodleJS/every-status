@@ -1,0 +1,43 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  border: 0;
+  background: transparent;
+}
+a {
+  outline: none;
+  text-decoration: none;
+  color: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+#hd {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background: #00a86b;
+  z-index: 9997;
+}
+#hd #header-inner {
+  position: relative;
+  max-width: 970px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+#hd #header-inner .tt {
+  float: left;
+  font-size: 120%;
+}
+#hd #header-inner ul#nav {
+  margin: 0;
+  padding: 0;
+}
+#hd #header-inner ul#nav li {
+  float: left;
+  margin-left: 10px;
+}

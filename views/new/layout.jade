@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    meta(http-equiv="Content-Type",content="text/html; charset=utf-8")
+    meta(name='viewport', content='initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0')
+    link(rel='stylesheet', href='../public/css/base_new.css')
+  body
+    #hd
+      #header-inner
+        .tt
+          a(href='/')
+            「 每思每刻 」
+        ul#nav
+          li today
+          li month
+          li year
+    //-     .account
+    //-       if user
+    //-         img.avatar(src='#{user.avatar}')
+    //-       else 
+    //-         img.avatar(src='../public/img/default-avatar.png')
+    //-       ul.menu
+    //-         if user
+    //-           li.menu-item
+    //-             a#write-note(href='/add') 写一点
+    //-           li.menu-item
+    //-             a#write-note(href='/pieces') 我的时刻
+    //-           li.menu-item
+    //-             a(href='/users/logout') 退出
+    //-         else
+    //-           li.menu-item
+    //-             a.login_douban(href='/users/login/db')
+    //-               img(src='http://img3.douban.com/pics/douban-icons/favicon_24x24.png', title='豆瓣登录')
+    //-           li.menu-item
+    //-             a.login_weibo(href='/users/login/wb')
+    //-               img(src='http://www.sinaimg.cn/blog/developer/wiki/LOGO_24x24.png', title='微博登录')
+    //-           li.menu-item
+    //-             a.login_github(href='/users/login/gt')
+    //-               img(src='../public/img/github.png', title='github登录')
+    //- #bd
+    //-   block content
+    //- #ft
+    //-   span#creator 沪ICP备14036472号
+    //-   a#about(href='javascript:;') 关于
+    //-   if ENV == "DEV"
+    //-     a(href='javascript:;') DEV          
