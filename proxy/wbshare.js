@@ -10,7 +10,7 @@ exports.share = function (user, content) {
   })
   var url = apiUrl + '?' + postData;
 
-  request.post({url: url, form: {status: content}} ,function(e, r, b) {
+  request.post({url: url, form: {text: content}} ,function(e, r, b) {
     if (e) throw Error('error in share');
     console.log(b)
   })

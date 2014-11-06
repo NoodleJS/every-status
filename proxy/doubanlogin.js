@@ -31,7 +31,6 @@ exports.getCodeCer = function(code) {
             "redirect_uri": db.codeUrl,
             "code": code
         });
-    console.log(_r);
     return _r;
 }
 

@@ -1,12 +1,14 @@
 var marked = require('marked');
 var Piece = require('../model/piece');
 var User = require('../model/user');
-var share = require('../proxy/wbshare');
+var wbshare = require('../proxy/wbshare');
+var dbshare = require('../proxy/dbshare');
 
 exports.create = function(req, res) {
   var user = req.session.user;
   var content = req.body.content;
-  var needShare = req.body.wbShare;
+  var needWbShare = req.body.wbShare;
+  var needDbShare = req.body.dbShare;
 
   new Piece({
     content: content,
@@ -20,8 +22,13 @@ exports.create = function(req, res) {
     syncUser(user);
   });
 
-  if (needShare) {
-    share.share(user, content);
+
+  if (needWbShare) {
+    wbshare.share(user, content);
+  }
+
+  if (needDbShare) {
+    dbshare.share(user, content);
   }
 }
 
@@ -63,8 +70,6 @@ exports.list = function(req, res) {
 exports.show = function(req, res) {
 
   var id = req.params.id;
-
-  console.log(id);
 
   if (isNaN(id)) {
     throw new Error('请输入正确的id值')

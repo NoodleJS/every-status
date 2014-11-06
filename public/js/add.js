@@ -1,4 +1,7 @@
 var $ = require('jquery');
-exports.test = function () {
-    console.log('hello world')
-}
+
+var sharebtn = $(".toweibo,.todouban");
+
+sharebtn.on("click",function(e){
+    $(this).toggleClass("active");
+});

@@ -87,7 +87,6 @@ exports.login = function(req, res) {
                 redirect_uri: setting.codeUrl,
                 scope: 'user,public_repo',
             })
-            console.log(query);
             res.redirect('https://github.com/login/oauth/authorize?'+query);
         }
             
@@ -102,23 +101,24 @@ exports.login = function(req, res) {
             if (user) {
                 doLogin(user, req, res);
             } else {
-                dbsignUp(msg, req, res);
+                dbsignUp(msg, token, req, res);
             }
         })
     }
 
-    function dbsignUp(msg, req, res) {
+    function dbsignUp(msg, token, req, res) {
         db.getInfo(msg)
             .then(function(msg) {
-                addDbUser(msg, req, res)
+                addDbUser(msg, token, req, res)
             });
     }
 
-    function addDbUser(msg) {
+    function addDbUser(msg, token, req, res) {
         new User({
             name: msg.name,
             dbId: msg.id,
-            avatar: msg.avatar
+            avatar: msg.avatar,
+            dbToken: token
         }).save(function(err, user) {
             if (err) throw new Error('Error In addDbUser'); 
             doLogin(user, req, res)
@@ -187,7 +187,6 @@ exports.login = function(req, res) {
     }
 
     function addGtUser(msg, req, res) {
-
         new User({
             name: msg.login,
             gtId: msg.id,
@@ -222,8 +221,6 @@ exports.logout = function(req, res) {
 }
 
 function syncUser(user){
-    
-  console.log(user.favs)
 
   User.update({name: user.name}, {favs: user.favs}, function(err) {
     console.log(err)

@@ -22,7 +22,9 @@ block content
         //- label.private-label(for='private') 私藏
       div.share
         span.lbl 分享：
-        //- if user.wbId
-        label.sharebtn.toweibo(for='weibochk')
-        input#weibochk(type='checkbox', value='weibo', name='wbShare')
-        label#doubanchk(type='checkbox', value='douban', name='share')
+        if user.wbId
+          label.sharebtn.toweibo(for='weibochk')
+          input#weibochk(type='checkbox', value='weibo', name='wbShare')
+        if user.dbId
+          label.sharebtn.todouban(for='doubanchk')
+          input#doubanchk(type='checkbox', value='douban', name='dbShare')
