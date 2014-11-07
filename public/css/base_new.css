@@ -40,4 +40,37 @@ ul {
 #hd #header-inner ul#nav li {
   float: left;
   margin-left: 10px;
+  color: #f00;
+  font-size: 90%;
+}
+#hd #header-inner ul#nav li a {
+  color: #000;
+}
+#hd #header-inner ul#nav li a:hover {
+  color: #666;
+}
+#hd #header-inner .account {
+  float: right;
+  position: relative;
+}
+#hd #header-inner .account .avatar {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  float: right;
+  margin: 10px;
+}
+#hd #header-inner .account ul.menu {
+  margin-top: 50px;
+}
+#hd #header-inner .account ul.menu li {
+  background: #00a86b;
+  border-bottom: 1px dotted #fff;
+  width: 50px;
+  height: 40px;
+}
+#hd #header-inner .account ul.menu li a img {
+  width: 24px;
+  height: 24px;
+  margin: 8px 13px;
 }
