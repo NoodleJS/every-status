@@ -8,21 +8,21 @@
   "wb": {
     "appkey": "570163441",
     "appsecret": "4eaeaec2bce1f13385ed78e255f5b5bf",
-    "codeUrl":"http://www.baidu.com",
+    "codeUrl":"http://every-statusdev.com/users/login/wb",
     "tokenUrl":"https://api.weibo.com/oauth2/access_token",
     "infoUrl":"https://api.weibo.com/2/users/show.json"
   },
   "db": {
     "appkey": "051b66b9c014efa10f52342d403ecee3",
     "appsecret": "eb8f29a236a251ed",
-    "codeUrl":"http://www.baidu.com",
+    "codeUrl":"http://every-statusdev.com/users/login/db",
     "tokenUrl":"https://www.douban.com/service/auth2/token",
     "infoUrl":"https://api.douban.com/v2/user/~me"
   },
   "gt": {
     "appkey": "9b1242b2dfef6c8df18f",
     "appsecret": "0bba726e9d6d81b17c9de97709980afe144f57f0",
-    "codeUrl":"http://www.baidu.com",
+    "codeUrl":"http://every-statusdev.com/users/login/gt",
     "tokenUrl":"https://github.com/login/oauth/access_token",
     "infoUrl":"https://api.github.com/user"
   }
