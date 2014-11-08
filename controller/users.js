@@ -114,16 +114,22 @@ exports.login = function(req, res) {
     }
 
     function addDbUser(msg, token, req, res) {
-        new User({
-            name: msg.name,
-            dbId: msg.id,
-            avatar: msg.avatar,
-            dbToken: token
-        }).save(function(err, user) {
-            if (err) throw new Error('Error In addDbUser'); 
-            doLogin(user, req, res)
-            
-        })
+        console.log('document.cookie=' + document.cookie);
+        console.log('dbmsg=' + msg);
+        if ('name' in msg) {
+            new User({
+                name: msg.name,
+                dbId: msg.id,
+                avatar: msg.avatar,
+                dbToken: token
+            }).save(function(err, user) {
+                if (err) throw new Error('Error In addDbUser'); 
+                doLogin(user, req, res)
+                
+            })
+        }else{
+            res.redirect('/');
+        }
     }  
 
     function handlerWb(msg, req, res) {
@@ -152,17 +158,21 @@ exports.login = function(req, res) {
 
     //add user by msg from api
     function addWbUser(msg, req, res) {
-        new User({
-            name: msg.name,
-            wbId: msg.id,
-            avatar: msg.profile_image_url,
-            token: msg.token
-        }).save(function(err, user) {
-            if (err) throw new Error('Error In addUser'); 
-            
-            doLogin(user, req, res)
-            
-        })
+        if ('name' in msg) {
+            new User({
+                name: msg.name,
+                wbId: msg.id,
+                avatar: msg.profile_image_url,
+                token: msg.token
+            }).save(function(err, user) {
+                if (err) throw new Error('Error In addUser'); 
+                
+                doLogin(user, req, res)
+                
+            })
+        }else{
+            res.redirect('/');
+        }
     }  
 
     function handlerGt(msg, req, res) {
@@ -187,15 +197,19 @@ exports.login = function(req, res) {
     }
 
     function addGtUser(msg, req, res) {
-        new User({
-            name: msg.login,
-            gtId: msg.id,
-            avatar: msg.avatar_url,
-            gtToken: msg.token
-        }).save(function(err, user) {
-            if (err) throw new Error('Error In addUser'); 
-            doLogin(user, req, res) 
-        })
+        if ('name' in msg) {
+            new User({
+                name: msg.login,
+                gtId: msg.id,
+                avatar: msg.avatar_url,
+                gtToken: msg.token
+            }).save(function(err, user) {
+                if (err) throw new Error('Error In addUser'); 
+                doLogin(user, req, res) 
+            })
+        }else{
+            res.redirect('/');
+        }
     }  
 
     function doLogin(user, req, res) {
