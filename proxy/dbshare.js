@@ -2,7 +2,7 @@ var request = require('request');
 var querystring = require('querystring');
 
 var env = global.env || 'development'; 
-var db = require('./getConfig').db;
+var db = require('./getconfig').db;
 
 exports.share = function (user, content) {
   var dbId = user.dbId;
