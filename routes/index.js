@@ -9,7 +9,7 @@ var connect = require('../proxy/connect');
 var login = require('../proxy/authorize');
 
 
-router.get('/' ,index.index)
+router.get('/' , login.couldLogin, index.index);
 
 router.get('/add', login.shouldLogin, function(req, res) {
     //渲染页面

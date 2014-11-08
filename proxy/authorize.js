@@ -27,6 +27,22 @@ exports.decodeToken = function(token) {
 
 }
 
+exports.couldLogin = function(req, res, next) {
+    // login if token exists in cookie
+    if ('token' in req.cookies) {
+        var token = exports.decodeToken(req.cookies.token);
+        User.findOne({_id: token}, function(err, it) {
+            if (it) {
+                req.session.user = it;
+                next();
+            }
+        })    
+    } else {
+        next();    
+    }
+    
+}
+
 exports.shouldLogin = function(req, res, next) {
 
     //do redict
