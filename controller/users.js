@@ -200,14 +200,13 @@ exports.login = function(req, res) {
 
     function doLogin(user, req, res) {
         
-        if ('session' in req) {
+        if ('session' in req && '_id' in user) {
             (req.session.user = user);    
+            var token = coder.encodeToken(user._id);
+            res.cookie('token', token,  { maxAge: 3600 * 24 * 7, httpOnly: false });    
         }
-        var token = coder.encodeToken(user._id);
-
-        res.cookie('token', token,  { maxAge: 3600 * 24 * 7, httpOnly: false });
-        res.redirect('/');
         
+        res.redirect('/');
         return
     }
  
