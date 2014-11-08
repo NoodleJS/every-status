@@ -4,7 +4,7 @@ var request = require('request');
 var Q = require('q');
 
 var env = global.env || 'development'; 
-var gt = require('./getConfig').gt;
+var gt = require('./getconfig').gt;
 
 function getCodeCer(code) {
     var _r =  querystring.stringify({
