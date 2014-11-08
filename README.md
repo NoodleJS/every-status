@@ -1,6 +1,7 @@
 every-status
 ============
 [![Build Status](https://travis-ci.org/elrrrrrrr/every-status.svg?branch=master)](https://travis-ci.org/elrrrrrrr/every-status)
+[![Deployment status from dploy.io](https://nodelab.dploy.io/badge/45290641896659/8919.png)](http://dploy.io)
 
 ## 这是什么
 
