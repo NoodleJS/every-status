@@ -157,7 +157,7 @@ exports.login = function(req, res) {
                 }
             } else {
                 //regsin
-                wbsignUp(msg, req, res);
+                wbsignUp(msg, token, req, res);
             }
         })
     }
@@ -170,14 +170,14 @@ exports.login = function(req, res) {
     }
 
     //add user by msg from api
-    function addWbUser(msg, req, res) {
+    function addWbUser(msg, token, req, res) {
         console.log('wbmsg=' + msg);
         if ('name' in msg) {
             new User({
                 name: msg.name,
                 wbId: msg.id,
                 avatar: msg.profile_image_url,
-                token: msg.token
+                token: token
             }).save(function(err, user) {
                 if (err) throw new Error('Error In addUser'); 
                 
@@ -206,7 +206,7 @@ exports.login = function(req, res) {
                     })
                 }
             } else {
-                gtsignUp(msg, req, res);
+                gtsignUp(msg, token, req, res);
             }
         })
     }
@@ -218,14 +218,14 @@ exports.login = function(req, res) {
             });
     }
 
-    function addGtUser(msg, req, res) {
+    function addGtUser(msg, token, req, res) {
         console.log('gtmsg=' + msg);
         if ('login' in msg) {
             new User({
                 name: msg.login,
                 gtId: msg.id,
                 avatar: msg.avatar_url,
-                gtToken: msg.token
+                gtToken: token
             }).save(function(err, user) {
                 if (err) throw new Error('Error In addUser'); 
                 doLogin(user, req, res) 
