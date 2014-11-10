@@ -99,7 +99,15 @@ exports.login = function(req, res) {
         User.findOne({dbId: dbId}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
             if (user) {
-                doLogin(user, req, res);
+                //login
+                if (user.dbToken && user.dbToken == token) {
+                    doLogin(user, req, res);
+                } else {
+                    user.dbToken = token;
+                    user.save(function(err, it) {
+                        doLogin(it, req, res);    
+                    })
+                }
             } else {
                 dbsignUp(msg, token, req, res);
             }
@@ -139,8 +147,14 @@ exports.login = function(req, res) {
             if (err) throw new Error('Error In DB');
             if (user) {
                 //login
-                user.token = token;
-                doLogin(user, req, res);
+                if (user.wbToken && user.wbToken == token) {
+                    doLogin(user, req, res);
+                } else {
+                    user.wbToken = token;
+                    user.save(function(err, it) {
+                        doLogin(it, req, res);    
+                    })
+                }
             } else {
                 //regsin
                 wbsignUp(msg, req, res);
@@ -182,7 +196,15 @@ exports.login = function(req, res) {
         User.findOne({gtToken: token}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
             if (user) {
-                doLogin(user, req, res);
+                //login
+                if (user.gtToken && user.gtToken == token) {
+                    doLogin(user, req, res);
+                } else {
+                    user.gtToken = token;
+                    user.save(function(err, it) {
+                        doLogin(it, req, res);    
+                    })
+                }
             } else {
                 gtsignUp(msg, req, res);
             }
@@ -234,10 +256,11 @@ exports.logout = function(req, res) {
     
 }
 
-function syncUser(user){
+function syncUser(user, cb){
 
   User.update({name: user.name}, {favs: user.favs}, function(err) {
     console.log(err)
     if (err) throw new Error('error in user ');
+    cb && cb();
   })
 }

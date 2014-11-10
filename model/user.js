@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
     gtId: String,
     name: String,
     avatar: String,
-    token: String,
+    wbToken: String,
     gtToken: String,
     dbToken: String,
     pieces: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Piece' }],
