@@ -122,7 +122,6 @@ exports.login = function(req, res) {
     }
 
     function addDbUser(msg, token, req, res) {
-        console.log('dbmsg=' + msg);
         if ('name' in msg) {
             new User({
                 name: msg.name,
@@ -171,7 +170,6 @@ exports.login = function(req, res) {
 
     //add user by msg from api
     function addWbUser(msg, token, req, res) {
-        console.log('wbmsg=' + msg);
         if ('name' in msg) {
             new User({
                 name: msg.name,
@@ -219,7 +217,6 @@ exports.login = function(req, res) {
     }
 
     function addGtUser(msg, token, req, res) {
-        console.log('gtmsg=' + msg);
         if ('login' in msg) {
             new User({
                 name: msg.login,
