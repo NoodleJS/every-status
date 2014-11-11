@@ -5,6 +5,7 @@
     "passwd":"admin",
     "dbname":"dev"
   },
+  "secret": "elrrrrrrr-qin",
   "wb": {
     "appkey": "570163441",
     "appsecret": "4eaeaec2bce1f13385ed78e255f5b5bf",

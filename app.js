@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var env = process.env.NODE_ENV || 'development';
+var secret = require('./getconfig').secret;
 
 var db = require('./proxy/index');
 var routes = require('./routes/index');
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-            secret: 'elrrrrrrr-qin',
+            secret: secret,
             resave: true,
             saveUninitialized: true
         }));
