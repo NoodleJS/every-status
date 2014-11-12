@@ -98,6 +98,26 @@ exports.login = function(req, res) {
             token = msg.access_token;
         User.findOne({dbId: dbId}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
+
+            // if ( 'user' in req.session) {
+            //     //update code
+            //     var user = req.session.user;
+            //     User.findOne({id: user.id})
+            //         .then(updateInfo)
+            //         .then(mergeAccount)
+            //         .end();
+                
+            //     function updateInfo(user) {
+                    
+            //     }
+
+            //     function mergeAccount() {
+                    
+            //     }
+            //     //do merge 
+
+            //     return ;
+            // }
             if (user) {
                 //login
                 if (user.dbToken && user.dbToken == token) {

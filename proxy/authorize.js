@@ -70,4 +70,9 @@ exports.shouldLogin = function(req, res, next) {
     }
 }
 
+exports.merge = function(user, code) {
+    //合并多个账户 以第一个账户为准
+    
+}
+
 
