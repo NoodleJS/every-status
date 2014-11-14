@@ -1,11 +1,83 @@
 html,
-body {
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
   margin: 0;
   padding: 0;
   font-size: 100%;
   vertical-align: baseline;
   border: 0;
   background: transparent;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 a {
   outline: none;
@@ -16,11 +88,22 @@ ol,
 ul {
   list-style: none;
 }
+button[type='submit'],
+input[type='submit'] {
+  cursor: pointer;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #444;
+  font-size: 100%;
+  text-rendering: optimizeLegibility;
+  background: #fff;
+}
 #hd {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #00a86b;
+  background: #333;
   z-index: 9997;
 }
 #hd #header-inner {
@@ -31,7 +114,7 @@ ul {
 }
 #hd #header-inner .tt {
   float: left;
-  font-size: 120%;
+  color: #fff;
 }
 #hd #header-inner ul#nav {
   margin: 0;
@@ -40,18 +123,20 @@ ul {
 #hd #header-inner ul#nav li {
   float: left;
   margin-left: 10px;
-  color: #f00;
   font-size: 90%;
 }
 #hd #header-inner ul#nav li a {
-  color: #000;
+  color: #999;
 }
 #hd #header-inner ul#nav li a:hover {
-  color: #666;
+  color: #ddd;
 }
 #hd #header-inner .account {
   float: right;
   position: relative;
+}
+#hd #header-inner .account:hover ul.menu {
+  display: block;
 }
 #hd #header-inner .account .avatar {
   width: 30px;
@@ -60,14 +145,42 @@ ul {
   float: right;
   margin: 10px;
 }
+#hd #header-inner .account a {
+  display: block;
+  width: 100px;
+  text-align: center;
+  color: #999;
+  font-size: 90%;
+}
+#hd #header-inner .account a:hover {
+  color: #ddd;
+}
 #hd #header-inner .account ul.menu {
-  margin-top: 50px;
+  width: 100px;
+  display: none;
+  background: #333;
+  border-radius: 6px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 #hd #header-inner .account ul.menu li {
-  background: #00a86b;
   border-bottom: 1px dotted #fff;
-  width: 50px;
-  height: 40px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+#hd #header-inner .account ul.menu li:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+#hd #header-inner .account ul.menu li a {
+  font-size: 90%;
+  color: #999;
+}
+#hd #header-inner .account ul.menu li a:hover {
+  color: #ddd;
+}
+#hd #header-inner .account ul.menu li:last-child {
+  border-bottom: none;
 }
 #hd #header-inner .account ul.menu li a img {
   width: 24px;
