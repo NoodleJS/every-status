@@ -1,10 +1,20 @@
-html,body
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td
   margin 0 
   padding 0
   font-size 100%
   vertical-align baseline
   border 0
   background transparent
+
+ol,ul 
+  list-style none
+
+blockquote,q
+  quotes none
+
+table
+  border-collapse collapse
+  border-spacing 0
 
 a
   outline none
@@ -14,11 +24,22 @@ a
 ol,ul 
   list-style none
 
+button[type='submit'],
+input[type='submit']
+  cursor pointer
+
+body
+  font-family "Helvetica Neue",Helvetica,Arial,sans-serif
+  color #444
+  font-size 100%
+  text-rendering optimizeLegibility
+  background #fff
+
 #hd
   width 100%
   height 50px
   line-height 50px
-  background #00a86b
+  background #333
   z-index 9997
   #header-inner
     position relative
@@ -27,35 +48,59 @@ ol,ul
     padding 0 12px
     .tt
       float left
-      font-size 120%
+      color #fff
     ul#nav
       margin 0 
       padding 0
       li
         float left
         margin-left 10px
-        color red
         font-size 90%
         a
-          color #000
+          color #999
           &:hover
-            color #666
+            color #ddd
     .account
       float right
       position relative
+      &:hover
+        ul.menu
+          display block
       .avatar
         width 30px
         height 30px
         vertical-align middle
         float right
         margin 10px
+      a
+        display block
+        width 100px
+        text-align center
+        color #999
+        font-size 90%
+        &:hover
+          color #ddd
       ul.menu
-        margin-top 50px
+        width 100px
+        display none
+        background #333
+        border-radius 6px
+        border-top-left-radius 0
+        border-top-right-radius 0
         li
-          background #00a86b
           border-bottom 1px dotted #fff
-          width 50px
-          height 40px
+          height 30px
+          line-height 30px
+          text-align center
+          &:hover
+            background-color rgba(255,255,255,0.1)
+          a
+            font-size 90%
+            color #999
+            &:hover
+              color #ddd
+          &:last-child
+            border-bottom none
           a
             img 
               width 24px

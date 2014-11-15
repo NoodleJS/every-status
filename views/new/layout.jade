@@ -18,7 +18,10 @@ html
           li 
             a(href='#') year
         .account
-          img.avatar(src='../public/img/people.png')
+          if use
+            img.avatar(src='../public/img/people.png')
+          else
+            a(href='#') login
           ul.menu
               //- li.menu-item
               //-   a#write-note(href='/add') 写一点
@@ -27,14 +30,12 @@ html
               //- li.menu-item
               //-   a(href='/users/logout') 退出
               li.menu-item
-                a.login_douban(href='/users/login/db')
-                  img(src='http://img3.douban.com/pics/douban-icons/favicon_24x24.png', title='豆瓣登录')
+                a.login_douban(href='/users/login/db') douban
               li.menu-item
-                a.login_weibo(href='/users/login/wb')
-                  img(src='http://www.sinaimg.cn/blog/developer/wiki/LOGO_24x24.png', title='微博登录')
+                a.login_weibo(href='/users/login/wb') weibo
               li.menu-item
-                a.login_github(href='/users/login/gt')
-                  img(src='../public/img/github.png', title='github登录')
+                a.login_github(href='/users/login/gt') github
+    #wrap
     //- #bd
     //-   block content
     //- #ft
