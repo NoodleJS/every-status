@@ -87,6 +87,8 @@ body
         border-radius 6px
         border-top-left-radius 0
         border-top-right-radius 0
+        position absolute
+        z-index 999
         li
           border-bottom 1px dotted #fff
           height 30px
@@ -106,3 +108,28 @@ body
               width 24px
               height 24px
               margin 8px 13px 
+#wrap
+  background url(img/bg.gif)
+  margin 0
+  padding 10px
+  width 100%
+  overflow hidden
+  .container
+    width 970px
+    margin 0 auto
+  ul.pieces
+    width 100%
+    margin 3% 0
+    overflow hidden
+    border-radius 3px
+    li
+      float left
+      width 22.680412371134%
+      margin-right 3.092783505155%
+      &:nth-child(4n)
+        margin-right 0
+      .content
+        position relative
+        clear left
+        background #fff
+        padding 10px
