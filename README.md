@@ -79,5 +79,5 @@ every-status
 - [x] 列表页重构
 - [ ] 界面改版
 - [ ] 整合账户
-
-- [ ] 增加github repo
+- [ ] 编码整理
+- [ ] 增加github仓库
