@@ -210,6 +210,31 @@ body {
   float: left;
   width: 22.680412371134%;
   margin-right: 3.092783505155%;
+  position: relative;
+}
+#wrap ul.pieces li p.layer {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 20px;
+  font-size: 12px;
+  line-height: 2;
+  text-decoration: none;
+  color: #888;
+  background: #fff;
+  background: rgba(255,255,255,0.96);
+  overflow: hidden;
+  z-index: 3;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#wrap ul.pieces li:hover p.layer {
+  opacity: 1;
 }
 #wrap ul.pieces li:nth-child(4n) {
   margin-right: 0;

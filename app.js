@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var env = process.env.NODE_ENV || 'development';
 var secret = require('./proxy/getconfig').secret;
+var temp = require('./proxy/index');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
