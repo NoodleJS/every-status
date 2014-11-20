@@ -4,7 +4,7 @@ var con = require('../controller/users');
 var mock = require('../controller/mock');
 
 router.get('/', function(req, res) {
-    
+    res.render('new/layout', {});
 })
 
 router.get('/showSession', function(req, res) {
@@ -14,6 +14,7 @@ router.get('/showSession', function(req, res) {
         content: JSON.stringify(req.session, null, 2)
     })
 })
+
 
 router.get('/showPieces', function(req, res) {
 
