@@ -1,5 +1,7 @@
 extends layout
 
 block content
-  h1= message
-  pre !{content}
+  link(rel='stylesheet', href='/css/md.css')
+  .md-con
+    h1= message
+    pre !{content}

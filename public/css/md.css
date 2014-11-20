@@ -1,3 +1,41 @@
-body {
-  font-family: Helvetica, arial, sans-serif;
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.md-con {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 30px;
+  word-wrap: break-word;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: -40px;
+}
+.md-con:first-child {
+  margin-top: 0 !important;
+}
+.md-con h1 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+.md-con blockquote {
+  padding: 0 15px;
+  font-size: 16px;
+  color: #777;
+  border-left: 4px solid #ddd;
+  display: block;
+  margin: 0px;
+  height: 25px;
 }
