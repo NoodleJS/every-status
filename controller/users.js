@@ -48,19 +48,13 @@ exports.login = function(req, res) {
     if (code) {
         if (type == 'db') {
             db.getToken(code)
-            .then(function(msg) {
-                handlerDb(msg, req, res)
-            })
+            .then(handlerDb(req, res))
         } else if (type == 'wb') {
             wb.getToken(code)
-                .then(function(msg){
-                    handlerWb(msg, req, res)   
-                })      
+                .then(handlerWb(req, res))      
         }else if(type == 'gt'){
             gt.getToken(code)
-                .then(function(msg){
-                    handlerGt(msg, req, res)   
-                })
+                .then(handlerGt(req, res))
         }
         
     } else {
@@ -93,10 +87,14 @@ exports.login = function(req, res) {
     }
     
 
-    function handlerDb(msg, req, res) {
-        var dbId = msg.douban_user_id,
-            token = msg.access_token;
-        User.findOne({dbId: dbId}).exec(function(err, user) {
+    function handlerDb(req, res) {
+
+        return function(msg) {
+
+            var dbId = msg.douban_user_id,
+                token = msg.access_token;
+
+            User.findOne({dbId: dbId}).exec(function(err, user) {
             if (err) throw new Error('Error when find dbuser');
 
             // if ( 'user' in req.session) {
@@ -132,6 +130,8 @@ exports.login = function(req, res) {
                 dbsignUp(msg, token, req, res);
             }
         })
+        }
+        
     }
 
     function dbsignUp(msg, token, req, res) {
@@ -158,27 +158,34 @@ exports.login = function(req, res) {
         }
     }  
 
-    function handlerWb(msg, req, res) {
-        var uid = msg.uid;
-        var token = msg.access_token;
+    function handlerWb(req, res) {
+        
         //resgin or login 
-        User.findOne({wbId: uid}, function(err, user) {
-            if (err) throw new Error('Error In DB');
-            if (user) {
-                //login
-                if (user.wbToken && user.wbToken == token) {
-                    doLogin(user, req, res);
+
+        return function(msg) {
+
+            var uid = msg.uid;
+            var token = msg.access_token;
+
+            User.findOne({wbId: uid}, function(err, user) {
+                if (err) throw new Error('Error In DB');
+                if (user) {
+                    //login
+                    if (user.wbToken && user.wbToken == token) {
+                        doLogin(user, req, res);
+                    } else {
+                        user.wbToken = token;
+                        user.save(function(err, it) {
+                            doLogin(it, req, res);    
+                        })
+                    }
                 } else {
-                    user.wbToken = token;
-                    user.save(function(err, it) {
-                        doLogin(it, req, res);    
-                    })
+                    //regsin
+                    wbsignUp(msg, token, req, res);
                 }
-            } else {
-                //regsin
-                wbsignUp(msg, token, req, res);
-            }
-        })
+            })    
+        }
+        
     }
 
     function wbsignUp(msg, req, res) {
@@ -207,26 +214,30 @@ exports.login = function(req, res) {
         }
     }  
 
-    function handlerGt(msg, req, res) {
+    function handlerGt(req, res) {
         //parse parm
-        var token = querystring.parse(msg).access_token;
         
-        User.findOne({gtToken: token}).exec(function(err, user) {
-            if (err) throw new Error('Error when find dbuser');
-            if (user) {
-                //login
-                if (user.gtToken && user.gtToken == token) {
-                    doLogin(user, req, res);
+        
+        return function(msg) {
+            var token = querystring.parse(msg).access_token;
+
+            User.findOne({gtToken: token}).exec(function(err, user) {
+                if (err) throw new Error('Error when find dbuser');
+                if (user) {
+                    //login
+                    if (user.gtToken && user.gtToken == token) {
+                        doLogin(user, req, res);
+                    } else {
+                        user.gtToken = token;
+                        user.save(function(err, it) {
+                            doLogin(it, req, res);    
+                        })
+                    }
                 } else {
-                    user.gtToken = token;
-                    user.save(function(err, it) {
-                        doLogin(it, req, res);    
-                    })
+                    gtsignUp(msg, token, req, res);
                 }
-            } else {
-                gtsignUp(msg, token, req, res);
-            }
-        })
+            })   
+        }
     }
 
     function gtsignUp(msg, req, res) {
