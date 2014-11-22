@@ -214,7 +214,7 @@ body {
   position: relative;
 }
 #wrap ul.pieces li p.layer {
-  opacity: 0;
+  opacity: 1;
   position: absolute;
   top: 0;
   left: 0;
@@ -234,19 +234,39 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-#wrap ul.pieces li:hover p.layer {
-  opacity: 1;
+#wrap ul.pieces li p.layer img {
+  margin-top: 4px;
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-left: 22px;
 }
-#wrap ul.pieces li:hover p.layer img {
-  width: 24px;
-  height: 24px;
+#wrap ul.pieces li p.layer img.heart {
+  width: 28px;
+  height: 28px;
 }
-#wrap ul.pieces li:hover p.layer img.pen {
+#wrap ul.pieces li p.layer img.pen {
   width: 20px;
   height: 20px;
 }
-#wrap ul.pieces li:hover p.layer em {
+#wrap ul.pieces li p.layer img.col {
+  width: 22px;
+  height: 22px;
+}
+#wrap ul.pieces li p.layer span {
   display: block;
+  font-size: 14px;
+  position: absolute;
+  bottom: 15px;
+  left: 55px;
+}
+#wrap ul.pieces li p.layer em {
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  left: 55px;
+}
+#wrap ul.pieces li:hover p.layer {
+  opacity: 1;
 }
 #wrap ul.pieces li:nth-child(4n) {
   margin-right: 0;
