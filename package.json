@@ -22,7 +22,8 @@
     "request": "2.40.0",
     "serve-favicon": "^2.1.5",
     "static-favicon": "~1.0.0",
-    "urllib": "^2.0.1"
+    "urllib": "^2.0.1",
+    "css-sprite": "~0.9.0"
   },
   "devDependencies": {
     "gulp-stylus": "*",
