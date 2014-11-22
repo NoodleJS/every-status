@@ -237,6 +237,17 @@ body {
 #wrap ul.pieces li:hover p.layer {
   opacity: 1;
 }
+#wrap ul.pieces li:hover p.layer img {
+  width: 24px;
+  height: 24px;
+}
+#wrap ul.pieces li:hover p.layer img.pen {
+  width: 20px;
+  height: 20px;
+}
+#wrap ul.pieces li:hover p.layer em {
+  display: block;
+}
 #wrap ul.pieces li:nth-child(4n) {
   margin-right: 0;
 }
