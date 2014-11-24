@@ -24,7 +24,7 @@ gulp.task('coffee', function() {
 gulp.task('jade', function() {
   return gulp.src(paths.jade)
     .pipe(jade())
-    .pipe(gulp.dest('html'))
+    .pipe(gulp.dest('public/html'))
 })
 
 gulp.task('work', function() {

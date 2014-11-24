@@ -15,6 +15,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var ajax = require('./routes/ajax');
 var temp = require('./routes/temp');
+var newVersion = require('./routes/new');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use(session({
 app.use('/', routes);
 app.use('/users', users);
 app.use('/ajax', ajax);
+app.use('/new', newVersion);  
 
 if (env === 'development') {
     app.use('/temp', temp);    
