@@ -47,4 +47,5 @@ contributors: install
 .PHONY: test
 
 run:
+	@nohup mongod >mongo.log & 
 	@hotnode bin/www
