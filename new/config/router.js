@@ -1,10 +1,11 @@
 'use strict';
-var router = require('koa-router');
+var Router = require('koa-router');
 var bodyParser = require('koa-bodyparser');
 
-module.exports = function(app) {
-  var controllers = app.controllers;
-  app.use(router(app));
+var router = new Router();
 
-  app.get('/temp', controllers.temp.temp);
-}
+router.get('/', function * () {
+  console.log('okk')
+})
+
+module.exports = router;

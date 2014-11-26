@@ -1,6 +1,7 @@
 'use strict';
 var join = require('path').join;
 var loading = require('loading');
+var mount = require('koa-mount');
 var routerEntry = require('../config/router');
 
 exports.loadController = function(app) {
@@ -11,5 +12,5 @@ exports.loadController = function(app) {
 };
 
 exports.loadRouter = function(app) {
-  routerEntry(app);
+  app.use(mount('/', routerEntry.middleware()));
 };
