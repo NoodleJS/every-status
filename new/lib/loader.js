@@ -12,11 +12,15 @@ exports.loadController = function(app) {
 
 exports.loadRouter = function(app) {
 
-  loading(join(__dirname, '../app/routers'))
+  loading(join(__dirname, '../app/routers'), {call: false})
     .into(app, 'routers');
 
   var routers = app.routers;
-  //routers.ajax();
-  app.use(mount('/', routers.ajax ) );
+  var controllers = app.controllers;
+
+  Object.keys(routers).forEach(function (e) {
+    app.use(mount('/'+e, routers[e](controllers)));
+  })
+  
 };
 
