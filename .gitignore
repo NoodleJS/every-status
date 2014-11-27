@@ -18,3 +18,4 @@ static/extension.pem
 settings.json
 html
 polymer/bower_components
+public/polymer/bower_components
