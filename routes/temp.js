@@ -4,7 +4,7 @@ var con = require('../controller/users');
 var mock = require('../controller/mock');
 
 router.get('/', function(req, res) {
-    res.render('new/layout', {});
+    res.render('new/index', {});
 })
 
 router.get('/showSession', function(req, res) {
