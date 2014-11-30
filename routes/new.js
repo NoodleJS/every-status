@@ -1,8 +1,9 @@
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 
 router.get('/', function(req, res) {
-    res.sendfile('/Users/qin/nodelab/every-status/polymer/index/index.html');
+    res.sendfile(path.join(__dirname, '../public/polymer/index/', 'index.html'));
 })
 
 module.exports = router;
