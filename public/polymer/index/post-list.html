@@ -1,6 +1,6 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../post-service/post-service.html">
-<link rel="import" href="post-card.html">
+<link rel="import" href="/polymer/bower_components/polymer/polymer.html">
+<link rel="import" href="/polymer/post-service/post-service.html">
+<link rel="import" href="/polymer/index/post-card.html">
 
 <polymer-element name="post-list" attributes="show">
   <template>
@@ -22,8 +22,8 @@
           favorite="{{post.favorite}}"
           on-favorite-tap="{{handleFavorite}}"
           hidden?="{{show == 'favorites' && !post.favorite}}">
-          <img src="{{post.avatar}}" width="70" height="70">
-          <h2>{{post.username}}</h2>
+          <img src="{{post.author.avatar}}" width="70" height="70">
+          <h2>{{post.author.name}}</h2>
           <p>{{post.content}}</p>
         </post-card>
       </template>

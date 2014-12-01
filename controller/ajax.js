@@ -4,17 +4,19 @@ var marked = require('marked');
 
 exports.index = function(req, res) {
     Piece.find({})
-        .sort('-created')
-        .exec(handlerData)
+    .sort('-created')
+    .populate('author')
+    .exec(handlerData)
 
-    function handlerData(err, set) {
+    function handlerData(err, pieces) {
         if (err) console.log(err)
-        if (set) {
-            set = set.map(function(e) {
+        if (pieces) {
+            pieces = pieces.map(function(e) {
                 e.content = marked(e.content);
                 return e
-            })
-            res.send(set)
+            });
+
+            res.send(pieces)
         }
     }
 }
