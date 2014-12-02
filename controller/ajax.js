@@ -1,25 +1,24 @@
 var Piece = require('../model/piece');
 var User = require('../model/user');
 var marked = require('marked');
-var _ = require('lodash');
 
 exports.index = function(req, res) {
-
-    console.log(JSON.stringify(req.session, null, 2));
 
     var user = req.session.user || {};
 
     Piece.find({})
     .sort('-created')
     .populate('author')
-    .exec(handlerData)
+    .lean()
+    .exec()
+    .then(handlerData)
 
-    function handlerData(err, pieces) {
-        if (err) console.log(err)
+    function handlerData(pieces) {
+        
         if (pieces) {
-            var piecelist = _.clone(pieces);
 
-            console.log('piecelist'+piecelist);
+            var piecelist = JSON.parse(JSON.stringify(pieces));
+            var piecelist = pieces;
 
             piecelist = piecelist.map(function(e) {
                 e.content = marked(e.content);
@@ -28,12 +27,10 @@ exports.index = function(req, res) {
                 }else{
                   e.favorite = false;
                 };
-                console.log('e.favorite' + e.favorite);
                 return e
             });
 
-            // console.log(pieces);
-            res.send(piecelist)
+            res.send(piecelist);
         }
     }
 }
