@@ -22,7 +22,7 @@ exports.index = function(req, res) {
 
             piecelist = piecelist.map(function(e) {
                 e.content = marked(e.content);
-                if (e.fans.indexOf(user._id + '') > -1) {
+                if (user.favs.indexOf(e._id + '') > -1) {
                   e.favorite = true;
                 }else{
                   e.favorite = false;

@@ -64,6 +64,7 @@
     },
     favoriteTapped: function(event, detail, sender) {
       this.favorite = !this.favorite;
+      console.log(this);
       this.fire('favorite-tap');
     }
   });

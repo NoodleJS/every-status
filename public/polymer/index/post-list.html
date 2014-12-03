@@ -24,7 +24,7 @@
           hidden?="{{show == 'favorites' && !post.favorite}}">
           <img src="{{post.author.avatar}}" width="70" height="70">
           <h2>{{post.author.name}}</h2>
-          <p>{{post.content}}</p>
+          <p>{{post.content | nl2b}}</p>
         </post-card>
       </template>
     </div>
@@ -35,6 +35,9 @@
     handleFavorite: function(event, detail, sender) {
       var post = sender.templateInstance.model.post;
       this.$.service.setFavorite(post.uid, post.favorite);
+    }
+    nl2b:function(txt){
+      return txt.replace(/\n/,'<br/>');
     }
   });
   </script>
