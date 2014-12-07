@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    #hd
+      #header-inner
+        .tt
+          a(href='/')
+            「 每思每刻 」
+        ul#nav
+          li 
+            a(href='#') today
+          li 
+            a(href='#') month
+          li 
+            a(href='#') year
+        .account
+          if use
+            img.avatar(src='/img/people.png')
+          else
+            a(href='#') login
+          ul.menu
+              //- li.menu-item
+              //-   a#write-note(href='/add') 写一点
+              //- li.menu-item
+              //-   a#write-note(href='/pieces') 我的时刻
+              //- li.menu-item
+              //-   a(href='/users/logout') 退出
+              li.menu-item
+                a.login_douban(href='/users/login/db') douban
+              li.menu-item
+                a.login_weibo(href='/users/login/wb') weibo
+              li.menu-item
+                a.login_github(href='/users/login/gt') github
+    #wrap
+      div.container
+        ul.pieces
+          li 
+            div.content 
+              p 《时代》让我们紧跟时代，从而毁灭了我们的记忆；无独有偶，它让我们密切关注从美国视角来看的世界，从而让我们迷失了方向。
+              p.layer
+                img.heart(src='/img/iconfont-heart.png')
+                img.col(src='/img/iconfont-shoucang (1).png')
+                img.pen(src='/img/iconfont-pen.png')
+                em.timestamp November 18, 2014
