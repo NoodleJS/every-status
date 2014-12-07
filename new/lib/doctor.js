@@ -1,6 +1,9 @@
 'use strict';
 var koa = require('koa');
 var loader = require('./loader');
+var mongoose = require('mongoose');
+
+//init db
 
 exports.createApp = function(opt) {
   var app = koa();
@@ -13,6 +16,7 @@ exports.createApp = function(opt) {
 
   loader.loadRouter(app);
 
+  loader.initDb();
+
   return app;
 };
-
