@@ -4,6 +4,6 @@ var Router = require('koa-router');
 module.exports = function(controllers) {
   
   var router = new Router();
-  router.get('/', controllers.temp.temp);  
+  router.get('/', controllers.index.show);  
   return router.middleware();  
 }

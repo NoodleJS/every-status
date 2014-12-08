@@ -2,6 +2,7 @@
 var join = require('path').join;
 var loading = require('loading');
 var mount = require('koa-mount');
+var serve = require('koa-static');
 var mongoose = require('mongoose');
 
 var settings = require('../app/utils/getconfig');
@@ -27,6 +28,11 @@ exports.loadRouter = function(app) {
   })
   
 };
+
+exports.loadStatic = function(app) {
+  
+  app.use(serve(__dirname + '/../app/assets'));
+}
 
 exports.initDb = function() { 
   var _settings = settings.mongodb;

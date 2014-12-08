@@ -10,6 +10,8 @@ exports.createApp = function(opt) {
     baseDir: opt.base || process.cwd()
   };
 
+  loader.loadStatic(app);
+
   loader.initDb();
 
   loader.loadController(app);
