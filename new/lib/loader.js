@@ -4,6 +4,7 @@ var loading = require('loading');
 var mount = require('koa-mount');
 var serve = require('koa-static');
 var mongoose = require('mongoose');
+var views = require('koa-views');
 
 var settings = require('../app/utils/getconfig');
 
@@ -32,6 +33,13 @@ exports.loadRouter = function(app) {
 exports.loadStatic = function(app) {
   
   app.use(serve(__dirname + '/../app/assets'));
+}
+
+exports.initViews = function(app) {
+
+  app.use(views(__dirname + '/../app/views', {
+    default: 'jade'
+  }));
 }
 
 exports.initDb = function() { 
