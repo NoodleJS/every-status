@@ -7,18 +7,8 @@ REPORTER = spec
 install:
 	@npm install
 
-jshint: install
-	@./node_modules/.bin/jshint ./lib
-
-test: install jshint
-	@NODE_ENV=test ./node_modules/.bin/mocha \
-		--harmony \
-		--reporter $(REPORTER) \
-		--timeout $(TIMEOUT) \
-		--require co-mocha \
-		--require should-http \
-		$(MOCHA_OPTS) \
-		$(TESTS)
+test:
+	@./node_modules/.bin/mocha test/test.js
 
 test-cov coverage cov: install jshint
 	@NODE_ENV=test node --harmony \
