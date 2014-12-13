@@ -32,29 +32,35 @@ var monthLink = {
 }
 
 function heredoc(fn) {
-    return fn.toString().split('\n').slice(1,-1).join('\n') + '\n'
+  return fn.toString().split('\n').slice(1, -1).join('\n') + '\n'
 }
- 
-var template = heredoc(function(){/*
-# Everyday
 
-> 重要的不是你想做什么，而是你做了什么。
+var template = heredoc(function() {
+  /*
+  # Everyday
 
-##  日历
-<%Object.keys(data['2014']).forEach(function(e) {%>
-* -[ ] [<%=monthName[e]%>](#<%=monthLink[e]%>) 
-<%})%>
-<%Object.keys(data['2014']).forEach(function(e) {%>
-<a  name="<%=monthLink[e]%>"></a>
-###  <%=monthName[e]%>
-<%Object.keys(data['2014'][e]).forEach(function(d) { %>
-.<%=d%> <%=data['2014'][e][d]%>
-<%})%>
-<%})%>
-*/})
+  > 重要的不是你想做什么，而是你做了什么。
+
+  ##  日历
+  <%Object.keys(data['2014']).forEach(function(e) {%>
+  * -[ ] [<%=monthName[e]%>](#<%=monthLink[e]%>) 
+  <%})%>
+  <%Object.keys(data['2014']).forEach(function(e) {%>
+  <a  name="<%=monthLink[e]%>"></a>
+  ###  <%=monthName[e]%>
+  <%Object.keys(data['2014'][e]).forEach(function(d) { %>
+  .<%=d%> <%=data['2014'][e][d]%>
+  <%})%>
+  <%})%>
+  */
+})
 
 exports.mark = function(data) {
-  var compiled = _.template(template, {data: data, monthName: monthName, monthLink: monthLink});
-  
+  var compiled = _.template(template, {
+    data: data,
+    monthName: monthName,
+    monthLink: monthLink
+  });
+
   return compiled
 }

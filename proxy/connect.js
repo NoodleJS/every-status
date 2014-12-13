@@ -1,5 +1,7 @@
 exports.sendOk = function(req, res) {
 
-    res.send({'code':200})
+  res.send({
+    'code': 200
+  })
 
 }

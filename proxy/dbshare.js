@@ -1,14 +1,14 @@
 var request = require('request');
 var querystring = require('querystring');
 
-var env = global.env || 'development'; 
+var env = global.env || 'development';
 var db = require('./getconfig').db;
 
-exports.share = function (user, content) {
+exports.share = function(user, content) {
   var dbId = user.dbId;
 
   var headers = {
-      Authorization: 'Bearer ' + user.dbToken
+    Authorization: 'Bearer ' + user.dbToken
   }
   var apiUrl = 'https://api.douban.com/shuo/v2/statuses/';
   var postData = querystring.stringify({
@@ -16,8 +16,15 @@ exports.share = function (user, content) {
   })
   var url = apiUrl;
 
-  
-  request.post({url: url, form: {source: db.appkey,text: content},headers: headers} ,function(e, r, b) {
+
+  request.post({
+    url: url,
+    form: {
+      source: db.appkey,
+      text: content
+    },
+    headers: headers
+  }, function(e, r, b) {
     if (e) throw Error('error in share');
   })
 }

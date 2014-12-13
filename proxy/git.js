@@ -10,14 +10,8 @@ var fakeUser = {
 }
 
 function doCheck(user) {
-  var apiPath = '/repos/' 
-      + user.gtName 
-      + '/'
-      + 'every-day'
-      + '/collaborators/'
-      + 'NoodleJS' // org name 
-      +'?access_token=' 
-      + user.token;
+  var apiPath = '/repos/' + user.gtName + '/' + 'every-day' + '/collaborators/' + 'NoodleJS' // org name 
+    + '?access_token=' + user.token;
 
   var url = baseUrl + apiPath;
 
