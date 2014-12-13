@@ -178,6 +178,7 @@ exports.login = function(req, res) {
         if (err) throw new Error('Error In DB');
         if (user) {
           //login
+
           if (user.wbToken && user.wbToken == token) {
             doLogin(user, req, res);
           } else {
