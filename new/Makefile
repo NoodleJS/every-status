@@ -6,3 +6,6 @@ name:
 run: 
 	@nohup mongod > ./logs/mongod.log & node app
 
+clean-log:
+	@rm ./logs/*
+
