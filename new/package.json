@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "elrrrrrrr@gmail.com",
+  "author": "elrrrrrrr@gmail.com & qinyuweiff@hotmail.com",
   "license": "MIT",
   "dependencies": {
     "koa": "^0.13.0",
